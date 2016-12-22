@@ -1,5 +1,5 @@
 <template lang="html">
-    <div class="pad-container__arrow">
+    <div class="pad-container__arrows">
         <div>
             {{ val1 }}
         </div>
@@ -42,7 +42,7 @@ export default {
 </script>
 
 <style lang="css">
-.pad-container__arrow {
+.pad-container__arrows {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -52,5 +52,9 @@ export default {
     align-items: stretch;
     background: #3273dc;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+}
+
+.pad-container__arrows > div {
+    align-self: center;
 }
 </style>

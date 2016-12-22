@@ -3,9 +3,7 @@
         <div class="hero-head">
             <div class="pad-container">
                 <direction position="left"></direction>
-                <div class="pad-container__buttons">
-                    <!-- botoes -->
-                </div>
+                <buttons></buttons>
                 <direction position="right"></direction>
             </div>
         </div>
@@ -14,11 +12,13 @@
 
 <script>
 import Direction from '../components/pad/Direction'
+import Buttons from '../components/pad/Buttons'
 
 export default {
     name: 'HomePage',
     components: {
-        Direction
+        Direction,
+        Buttons
     }
 }
 </script>
@@ -28,19 +28,5 @@ export default {
     display: flex;
     width: 100%;
     min-height: 100vh;
-}
-
-.pad-container__arrow > div {
-    display: inline-block;
-    width: 50%;
-    height: 50%;
-}
-
-.pad-container__arrow--left, .pad-container__arrow--right {
-    min-height: 50%;
-}
-
-.pad-container__buttons {
-    flex-grow: 6;
 }
 </style>
