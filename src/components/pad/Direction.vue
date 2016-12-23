@@ -1,5 +1,5 @@
 <template lang="html">
-    <div class="pad-container__arrows">
+    <div class="pad-container__arrows" :class="{'is-turning': turning}">
         <div>
             {{ val1 }}
         </div>
@@ -15,6 +15,10 @@ export default {
     props: {
         position: {
             type: String,
+            required: true
+        },
+        turning: {
+            type: Boolean,
             required: true
         }
     },
@@ -56,5 +60,9 @@ export default {
 
 .pad-container__arrows > div {
     align-self: center;
+}
+
+.is-turning {
+    background-color: #ff3860 !important;
 }
 </style>

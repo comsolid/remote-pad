@@ -16,11 +16,21 @@
                 <span>A</span>
             </div>
         </div>
+        <div class="row row-debug">
+            <span>{{Math.round(yAxis)}}</span>
+        </div>
     </div>
 </template>
 
 <script>
 export default {
+    name: 'Buttons',
+    props: {
+        yAxis: {
+            type: Number,
+            required: true
+        }
+    }
 }
 </script>
 
@@ -34,12 +44,8 @@ export default {
     justify-content: space-around;
 }
 
-.row-1 {
-    flex-direction: row-reverse;
-}
-
-.row-2 {
-
+.row-debug > span {
+    font-size: 22px;
 }
 
 .row > div {
@@ -62,8 +68,8 @@ export default {
 }
 
 .pad-button-md {
-    width: 300px;
-    height: 300px;
+    width: 280px;
+    height: 280px;
     background-color: #3273dc;
 }
 </style>

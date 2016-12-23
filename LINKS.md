@@ -10,6 +10,9 @@
 * <http://www.creativebloq.com/web-design/master-screen-orientation-html5-101517371>
 * <https://code.tutsplus.com/tutorials/an-introduction-to-the-device-orientation-api--cms-21067>
 * <http://albertosarullo.com/demos/accelerometer/>
+* <https://jsfiddle.net/hr77p7qb/3/> - Window events
+* <https://github.com/AurelioDeRosa/HTML5-API-demos> - HTML5 API demos
+* <https://hacks.mozilla.org/2013/06/the-proximity-api/> - The Proximity API
 
 ## Express
 
