@@ -28,6 +28,7 @@ import Vue from 'vue'
 import Direction from '../components/pad/Direction'
 import Buttons from '../components/pad/Buttons'
 import PadButton from '../components/pad/PadButton'
+import mqtt from 'mqtt'
 
 export default {
     name: 'RacePadPage',
@@ -38,6 +39,7 @@ export default {
     },
     data () {
         return {
+            topic: 'race',
             acceleration: {
                 y: 0
             },
@@ -49,7 +51,12 @@ export default {
                 left: false,
                 right: false
             },
-            interval: null
+            interval: null,
+            mqtt: {
+                client: null,
+                topic: '',
+                profile: 'race'
+            }
         }
     },
     mounted () {
@@ -58,11 +65,31 @@ export default {
                 this.acceleration.y = e.accelerationIncludingGravity.y || 0
             }
         }
+        const { hostname, port } = this.$store.state.mqtt
+        const url = `ws://${hostname}:${port}`
+        const player = this.$store.state.player
+        this.mqtt.topic = `${this.mqtt.profile}/${player}`
+        this.mqtt.client = mqtt.connect(url)
+
+        // TODO: verificar metodo on('error'...
+        this.mqtt.client.on('error', (error) => {
+            console.log('Error', error)
+            this.$router.push({ path: '/config' })
+        })
+
+        this.mqtt.client.on('connect', () => {
+            console.log(`Connected to ${url}`)
+            this.mqtt.client.subscribe(this.mqtt.topic)
+        })
+
+        this.mqtt.client.on('close', function () {
+            console.log('disconnected')
+        })
 
         // Setup a 60fps interval - 15
         this.interval = setInterval(() => {
             this.send()
-        }, 500)
+        }, 100)
     },
     methods: {
         touchstart (command) {
@@ -72,8 +99,9 @@ export default {
             Vue.set(this.keypress, command, false)
         },
         send () {
-            // sends the data to the server
-            console.log(JSON.stringify(this.keypress))
+            if (this.$store.state.pad.enabled) {
+                this.mqtt.client.publish(this.mqtt.topic, JSON.stringify(this.keypress))
+            }
         }
     },
     computed: {
@@ -88,6 +116,10 @@ export default {
     },
     beforeDestroy () {
         clearInterval(this.interval)
+
+        if (this.mqtt.client) {
+            this.mqtt.client.end()
+        }
     }
 }
 </script>

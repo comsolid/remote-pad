@@ -11,6 +11,7 @@
 
 * <http://www.flexboxpatterns.com/home>
 * <http://howtocenterincss.com/>
+* <http://jsfiddle.net/La8wQ/22/> - style radio buttons with images
 
 ## HTML5 Device Orientation API
 

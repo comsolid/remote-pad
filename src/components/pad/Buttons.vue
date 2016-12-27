@@ -2,6 +2,7 @@
     <div class="pad-container__buttons">
         <div class="row row-1">
             <slot name="Y"></slot>
+            <TogglePadButton></TogglePadButton>
             <router-link to="/config"
                 class="button is-inverted is-medium">Config</router-link>
             <slot name="X"></slot>
@@ -17,8 +18,13 @@
 </template>
 
 <script>
+import TogglePadButton from '../TogglePad'
+
 export default {
     name: 'Buttons',
+    components: {
+        TogglePadButton
+    },
     props: {
         yAxis: {
             type: Number,

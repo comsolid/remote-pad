@@ -7,8 +7,22 @@ const store = new Vuex.Store({
     state: {
         player: 'alice',
         pad: {
-            enabled: true,
-            direction: null
+            enabled: false,
+            type: 'race'
+        },
+        mqtt: {
+            hostname: window.location.hostname,
+            port: 1884
+        }
+    },
+    mutations: {
+        config (state, payload) {
+            state.player = payload.player
+            state.mqtt = payload.mqtt
+            state.pad = payload.pad
+        },
+        togglePad (state) {
+            state.pad.enabled = !state.pad.enabled
         }
     }
 })
