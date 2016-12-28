@@ -69,7 +69,11 @@ export default {
         const url = `ws://${hostname}:${port}`
         const player = this.$store.state.player
         this.mqtt.topic = `${this.mqtt.profile}/${player}`
-        this.mqtt.client = mqtt.connect(url)
+        const options = {
+            username: player,
+            password: player
+        }
+        this.mqtt.client = mqtt.connect(url, options)
 
         // TODO: verificar metodo on('error'...
         this.mqtt.client.on('error', (error) => {
@@ -89,7 +93,7 @@ export default {
         // Setup a 60fps interval - 15
         this.interval = setInterval(() => {
             this.send()
-        }, 100)
+        }, 80)
     },
     methods: {
         touchstart (command) {
@@ -106,11 +110,13 @@ export default {
     },
     computed: {
         isTurningLeft () {
-            Vue.set(this.keypress, 'left', this.acceleration.y < -2)
+            const { accelerationSensibility } = this.$store.state
+            Vue.set(this.keypress, 'left', this.acceleration.y < accelerationSensibility * -1)
             return this.keypress.left
         },
         isTurningRight () {
-            Vue.set(this.keypress, 'right', this.acceleration.y > 2)
+            const { accelerationSensibility } = this.$store.state
+            Vue.set(this.keypress, 'right', this.acceleration.y > accelerationSensibility)
             return this.keypress.right
         }
     },

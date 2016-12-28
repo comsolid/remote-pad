@@ -71,9 +71,28 @@
                             <input type="radio" v-model="player" value="bob">
                         </label>
                     </p>
+                    <label class="label" for="acceleration_sensibility">
+                        Acceleration Sensibility
+                    </label>
+                    <p class="control">
+                        <input type="range" min="2" max="4" step="0.5"
+                            v-model="accelerationSensibility" />
+                        <span class="help">
+                            <div class="columns is-mobile">
+                                <div class="column">
+                                    Min: 2, Max: 4
+                                </div>
+                                <div class="column">
+                                    Selected: {{ accelerationSensibility }}
+                                </div>
+                            </div>
+
+
+                        </span>
+                    </p>
 
                     <p class="control">
-                        <button class="button is-primary"
+                        <button class="button is-primary is-large"
                             @click.prevent="save">Save</button>
                     </p>
                 </div>
@@ -95,20 +114,24 @@ export default {
                 type: 'race',
                 enabled: false
             },
-            player: 'alice'
+            player: 'alice',
+            accelerationSensibility: 2
         }
     },
     mounted () {
         this.mqtt = this.$store.state.mqtt
         this.pad = this.$store.state.pad
+        this.pad.enabled = false
         this.player = this.$store.state.player
+        this.accelerationSensibility = this.$store.state.accelerationSensibility
     },
     methods: {
         save () {
             this.$store.commit('config', {
                 mqtt: this.mqtt,
                 pad: this.pad,
-                player: this.player
+                player: this.player,
+                accelerationSensibility: this.accelerationSensibility
             })
             this.$router.push({ path: '/' })
         }
@@ -123,5 +146,56 @@ label.radio > input {
 }
 .radio--selected {
     border: 2px solid #3273dc;
+}
+input[type=range] {
+    /*removes default webkit styles*/
+    -webkit-appearance: none;
+    /*fix for FF unable to apply focus style bug */
+    border: 1px solid white;
+    /*required for proper track sizing in FF*/
+    width: 300px;
+}
+input[type=range]::-webkit-slider-runnable-track {
+    width: 300px;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #3273dc;
+    margin-top: -8px;
+}
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
+}
+
+input[type=range]::-moz-range-track {
+    width: 300px;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+input[type=range]::-moz-range-thumb {
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #3273dc;
+}
+
+/*hide the outline behind the border*/
+input[type=range]:-moz-focusring{
+    outline: 1px solid white;
+    outline-offset: -1px;
 }
 </style>

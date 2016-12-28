@@ -13,13 +13,15 @@ const store = new Vuex.Store({
         mqtt: {
             hostname: window.location.hostname,
             port: 1884
-        }
+        },
+        accelerationSensibility: 2
     },
     mutations: {
         config (state, payload) {
             state.player = payload.player
             state.mqtt = payload.mqtt
             state.pad = payload.pad
+            state.accelerationSensibility = payload.accelerationSensibility
         },
         togglePad (state) {
             state.pad.enabled = !state.pad.enabled

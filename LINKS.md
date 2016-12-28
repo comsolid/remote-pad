@@ -12,6 +12,7 @@
 * <http://www.flexboxpatterns.com/home>
 * <http://howtocenterincss.com/>
 * <http://jsfiddle.net/La8wQ/22/> - style radio buttons with images
+* <http://brennaobrien.com/blog/2014/05/style-input-type-range-in-every-browser.html>
 
 ## HTML5 Device Orientation API
 

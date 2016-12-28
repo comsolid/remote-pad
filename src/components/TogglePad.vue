@@ -1,6 +1,7 @@
 <template lang="html">
     <button @click.prevent="togglePad"
-        class="button is-inverted is-medium">{{ text }}</button>
+        class="button is-medium"
+        :class="color">{{ text }}</button>
 </template>
 
 <script>
@@ -9,6 +10,9 @@ export default {
     computed: {
         text () {
             return (this.$store.state.pad.enabled ? 'On' : 'Off')
+        },
+        color () {
+            return (this.$store.state.pad.enabled ? 'is-success' : 'is-danger')
         }
     },
     methods: {
