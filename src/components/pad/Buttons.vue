@@ -12,7 +12,8 @@
             <slot name="A"></slot>
         </div>
         <div class="row row-debug">
-            <span>Y axis: {{ Math.round(yAxis) }}</span>
+            <slot name="indicator"></slot>
+            <span class="tag is-dark">Y axis: {{ Math.round(yAxis) }}</span>
         </div>
     </div>
 </template>
@@ -34,7 +35,7 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
 .pad-container__buttons {
     flex-grow: 6;
 }
@@ -50,10 +51,11 @@ export default {
 
 .row-2 {
     justify-content: space-around;
+    color: #fff;
 }
 
 .row-debug {
-    justify-content: center;
+    justify-content: space-around;
 }
 
 .row-debug > span {

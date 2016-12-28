@@ -1,9 +1,11 @@
 <template lang="html">
-    <section class="hero is-primary is-fullheight">
+    <section class="hero is-light is-fullheight">
         <div class="hero-head">
             <div class="pad-container">
                 <direction position="left" :turning="isTurningLeft"></direction>
                 <buttons :yAxis="acceleration.y">
+                    <ConnectedIndicator slot="indicator"
+                        :isConnected="mqtt.isConnected"></ConnectedIndicator>
                     <PadButton slot="Y" text="Y" size="sm"
                         :touchstart="touchstart"
                         :touchend="touchend"></PadButton>
@@ -28,6 +30,7 @@ import Vue from 'vue'
 import Direction from '../components/pad/Direction'
 import Buttons from '../components/pad/Buttons'
 import PadButton from '../components/pad/PadButton'
+import ConnectedIndicator from '../components/ConnectedIndicator'
 import mqtt from 'mqtt'
 
 export default {
@@ -35,7 +38,8 @@ export default {
     components: {
         Direction,
         Buttons,
-        PadButton
+        PadButton,
+        ConnectedIndicator
     },
     data () {
         return {
@@ -55,7 +59,8 @@ export default {
             mqtt: {
                 client: null,
                 topic: '',
-                profile: 'race'
+                profile: 'race',
+                isConnected: false
             }
         }
     },
@@ -83,11 +88,13 @@ export default {
 
         this.mqtt.client.on('connect', () => {
             console.log(`Connected to ${url}`)
+            this.mqtt.isConnected = true
             this.mqtt.client.subscribe(this.mqtt.topic)
         })
 
-        this.mqtt.client.on('close', function () {
+        this.mqtt.client.on('close', () => {
             console.log('disconnected')
+            this.mqtt.isConnected = false
         })
 
         // Setup a 60fps interval - 15

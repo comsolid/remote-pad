@@ -1,10 +1,7 @@
 <template lang="html">
     <div class="pad-container__arrows" :class="{'is-turning': turning}">
-        <div>
+        <div v-once>
             {{ val1 }}
-        </div>
-        <div>
-            {{ val2 }}
         </div>
     </div>
 </template>
@@ -28,14 +25,12 @@ export default {
             switch (this.position) {
             case 'left':
                 values = {
-                    val1: 1,
-                    val2: 2
+                    val1: 'L'
                 }
                 break
             case 'right':
                 values = {
-                    val1: 3,
-                    val2: 4
+                    val1: 'R'
                 }
                 break
             }
@@ -60,6 +55,7 @@ export default {
 
 .pad-container__arrows > div {
     align-self: center;
+    color: #fff;
 }
 
 .is-turning {
