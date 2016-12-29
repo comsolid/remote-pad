@@ -18,5 +18,6 @@ export default function lockScreen () {
         'msRequestFullscreen'
     ])
 
-    window.screen.orientation.lock(window.screen.orientation.type)
+    // Force landscape mode
+    window.screen.orientation.lock('landscape')
 }
