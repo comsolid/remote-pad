@@ -15,24 +15,21 @@
                         <input type="url" class="input" id="mqtt_hostname"
                             v-model="mqtt.hostname" placeholder="ex. 192.168.0.1">
                     </p>
+
                     <label class="label" for="mqtt_port">Port</label>
                     <p class="control">
                         <input type="number" class="input" id="mqtt_port"
                             v-model="mqtt.port">
                     </p>
-                    <div class="columns is-mobile">
-                        <div class="column is-half">
-                            <label class="label" for="pad_type">PAD Type</label>
-                            <p class="control">
-                                <span class="select">
-                                    <select id="pad_type" v-model="pad.type">
-                                        <option value="race">Race</option>
-                                    </select>
-                                </span>
-                            </p>
-                        </div>
 
-                    </div>
+                    <label class="label" for="pad_type">PAD Type</label>
+                    <p class="control">
+                        <span class="select">
+                            <select id="pad_type" v-model="pad.type">
+                                <option value="race">Race</option>
+                            </select>
+                        </span>
+                    </p>
 
                     <label class="label" for="player">Player</label>
                     <p class="control">
@@ -71,6 +68,7 @@
                             <input type="radio" v-model="player" value="bob">
                         </label>
                     </p>
+
                     <label class="label" for="acceleration_sensibility">
                         Acceleration Sensibility
                     </label>
@@ -86,14 +84,14 @@
                                     Selected: {{ accelerationSensibility }}
                                 </div>
                             </div>
-
-
                         </span>
                     </p>
 
                     <p class="control">
                         <button class="button is-primary is-large"
                             @click.prevent="save">Save</button>
+                        <button class="button is-info is-large"
+                            @click="goFullscreen">Go Fullscreen</button>
                     </p>
                 </div>
             </div>
@@ -102,6 +100,8 @@
 </template>
 
 <script>
+import lockScreen from '../utils/lock_screen'
+
 export default {
     name: 'ConfigPage',
     data () {
@@ -134,6 +134,9 @@ export default {
                 accelerationSensibility: this.accelerationSensibility
             })
             this.$router.push({ path: '/' })
+        },
+        goFullscreen () {
+            lockScreen()
         }
     }
 }
