@@ -22,14 +22,29 @@
                             v-model="mqtt.port">
                     </p>
 
-                    <label class="label" for="pad_type">PAD Type</label>
-                    <p class="control">
-                        <span class="select">
-                            <select id="pad_type" v-model="pad.type">
-                                <option value="race">Race</option>
-                            </select>
-                        </span>
-                    </p>
+                    <div class="columns is-mobile">
+                        <div class="column">
+                            <label class="label" for="pad_type">PAD Type</label>
+                            <p class="control">
+                                <span class="select">
+                                    <select id="pad_type" v-model="pad.type">
+                                        <option value="race">Race</option>
+                                    </select>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="column">
+                            <label class="label" for="pad_profile">PAD Profile</label>
+                            <p class="control">
+                                <span class="select">
+                                    <select id="pad_profile" v-model="pad.profile">
+                                        <option value="snes--top_gear">SNES - Top Gear</option>
+                                        <option value="n64--mario_kart">N64 - Mario Kart</option>
+                                    </select>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
 
                     <label class="label" for="player">Player</label>
                     <p class="control">
@@ -108,13 +123,14 @@ export default {
         return {
             mqtt: {
                 hostname: '',
-                port: 1884
+                port: 0
             },
             pad: {
-                type: 'race',
-                enabled: false
+                type: '',
+                enabled: false,
+                profile: ''
             },
-            player: 'alice',
+            player: '',
             accelerationSensibility: 2
         }
     },
