@@ -61,7 +61,8 @@ export default {
                 topic: '',
                 profile: 'race',
                 isConnected: false
-            }
+            },
+            lastCommandSent: null
         }
     },
     mounted () {
@@ -90,6 +91,9 @@ export default {
             console.log(`Connected to ${url}`)
             this.mqtt.isConnected = true
             this.mqtt.client.subscribe(this.mqtt.topic)
+
+            const settings = JSON.stringify({pad: this.$store.state.pad})
+            this.mqtt.client.publish(`settings/${player}`, settings)
         })
 
         this.mqtt.client.on('close', () => {
@@ -100,7 +104,7 @@ export default {
         // Setup a 60fps interval - 15
         this.interval = setInterval(() => {
             this.send()
-        }, 80)
+        }, 40)
     },
     methods: {
         touchstart (command) {
@@ -110,8 +114,12 @@ export default {
             Vue.set(this.keypress, command, false)
         },
         send () {
-            if (this.$store.state.pad.enabled) {
-                this.mqtt.client.publish(this.mqtt.topic, JSON.stringify(this.keypress))
+            const command = JSON.stringify(this.keypress)
+            if (this.$store.state.pad.enabled &&
+                    command !== this.lastCommandSent) {
+                // publishes only if the command change
+                this.lastCommandSent = command
+                this.mqtt.client.publish(this.mqtt.topic, command)
             }
         }
     },

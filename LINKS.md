@@ -38,3 +38,11 @@
 
 * <https://sourceforge.net/projects/pisnes/>
 * <https://gitlab.com/higan/higan>
+
+## Emuladores Nintendo 64
+
+* <http://www.mupen64plus.org/wiki/index.php?title=KeyboardSetup>
+* <https://github.com/mupen64plus/mupen64plus-ui-python>
+* <https://github.com/mupen64plus/mupen64plus-core/releases>
+* <https://sourceforge.net/projects/cutemupen/>
+

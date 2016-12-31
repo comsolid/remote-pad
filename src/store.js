@@ -8,7 +8,8 @@ const store = new Vuex.Store({
         player: 'alice',
         pad: {
             enabled: false,
-            type: 'race'
+            type: 'race',
+            profile: 'snes--top_gear'
         },
         mqtt: {
             hostname: window.location.hostname,
