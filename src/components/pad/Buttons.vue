@@ -10,6 +10,7 @@
         <div class="row row-2">
             <slot name="B"></slot>
             <slot name="A"></slot>
+            <slot name="up-down-buttons"></slot>
         </div>
         <div class="row row-debug">
             <slot name="indicator"></slot>

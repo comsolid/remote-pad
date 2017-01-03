@@ -2,8 +2,8 @@
     <section class="hero is-light is-fullheight">
         <div class="hero-head">
             <div class="pad-container">
-                <direction position="left" :turning="isTurningLeft"></direction>
-                <buttons :yAxis="acceleration.y">
+                <Direction position="left" :turning="isTurningLeft"></Direction>
+                <Buttons :yAxis="acceleration.y">
                     <ConnectedIndicator slot="indicator"
                         :isConnected="mqtt.isConnected"></ConnectedIndicator>
                     <PadButton slot="Y" text="Y" size="sm"
@@ -18,8 +18,17 @@
                     <PadButton slot="A" text="A" size="md"
                         :touchstart="touchstart"
                         :touchend="touchend"></PadButton>
-                </buttons>
-                <direction position="right" :turning="isTurningRight"></direction>
+                    <div slot="up-down-buttons" class="up-down-buttons"
+                        v-show="!isMinimalLayout()">
+                        <PadButton text="up" size="xs"
+                            :touchstart="touchstart"
+                            :touchend="touchend"></PadButton>
+                        <PadButton text="down" size="xs"
+                            :touchstart="touchstart"
+                            :touchend="touchend"></PadButton>
+                    </div>
+                </Buttons>
+                <Direction position="right" :turning="isTurningRight"></Direction>
             </div>
         </div>
     </section>
@@ -53,7 +62,9 @@ export default {
                 B: false,
                 A: false,
                 left: false,
-                right: false
+                right: false,
+                up: false,
+                down: false
             },
             interval: null,
             mqtt: {
@@ -97,7 +108,7 @@ export default {
         })
 
         this.mqtt.client.on('close', () => {
-            console.log('disconnected')
+            console.info('Disconnected')
             this.mqtt.isConnected = false
         })
 
@@ -121,6 +132,9 @@ export default {
                 this.lastCommandSent = command
                 this.mqtt.client.publish(this.mqtt.topic, command)
             }
+        },
+        isMinimalLayout () {
+            return this.$store.state.pad.minimalLayout
         }
     },
     computed: {
@@ -149,5 +163,9 @@ export default {
 .pad-container {
     display: flex;
     min-height: 100vh;
+}
+.up-down-buttons {
+    display: flex;
+    flex-direction: column;
 }
 </style>
