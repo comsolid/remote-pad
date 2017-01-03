@@ -74,6 +74,13 @@
                     </p>
 
                     <p class="control">
+                        <label class="checkbox">
+                            <input type="checkbox" v-model="pad.minimalLayout" />
+                            Pad - Minimal Layout?
+                        </label>
+                    </p>
+
+                    <p class="control">
                         <button class="button is-primary is-large"
                             @click.prevent="save">Save</button>
                         <button class="button is-info is-large is-pulled-right"
@@ -103,7 +110,8 @@ export default {
             pad: {
                 type: '',
                 enabled: false,
-                profile: ''
+                profile: '',
+                minimalLayout: true
             },
             player: '',
             accelerationSensibility: 2,

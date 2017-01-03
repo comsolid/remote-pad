@@ -49,7 +49,7 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
 .pad-button {
     border-radius: 50%;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
@@ -57,29 +57,31 @@ export default {
     justify-content: center;
     align-items: center;
 }
-
-.pad-button > span {
+.md {
+    min-width: 130px;
+    min-height: 130px;
+    background-color: #3273dc;
     font-size: 22px;
 }
-
+.md--touch {
+    background-color: #0040A9;
+}
 .sm {
     width: 90px;
     height: 90px;
     background-color: #ffdd57;
     color: rgba(0, 0, 0, 0.7);
+    font-size: 20px;
 }
-
-.sm--touch {
+.xs {
+    width: 60px;
+    height: 60px;
+    background-color: #ffdd57;
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 16px;
+    margin-top: 5px;
+}
+.sm--touch, .xs--touch {
     background-color: #E6C43E;
-}
-
-.md {
-    min-width: 130px;
-    min-height: 130px;
-    background-color: #3273dc;
-}
-
-.md--touch {
-    background-color: #0040A9;
 }
 </style>
