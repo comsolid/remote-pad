@@ -47,41 +47,12 @@
                     </div>
 
                     <label class="label" for="player">Player</label>
-                    <p class="control">
-                        <label class="radio">
-                            <div class="card is-fullwidth"
-                                :class="{'radio--selected': player === 'alice'}">
-                                <div class="card-image">
-                                    <figure class="image is-128x128">
-                                        <img src="../assets/img/alice.png" alt="">
-                                    </figure>
-                                </div>
-                                <div class="card-content">
-                                    <div class="content is-medium">
-                                        <p class="title">Alice</p>
-                                        <p class="subtitle">Player 1</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <input type="radio" v-model="player" value="alice">
-                        </label>
-                        <label class="radio">
-                            <div class="card is-fullwidth"
-                                :class="{'radio--selected': player === 'bob'}">
-                                <div class="card-image">
-                                    <figure class="image is-128x128">
-                                        <img src="../assets/img/bob.png" alt="">
-                                    </figure>
-                                </div>
-                                <div class="card-content">
-                                    <div class="content is-medium">
-                                        <p class="title">Bob</p>
-                                        <p class="subtitle">Player 2</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <input type="radio" v-model="player" value="bob">
-                        </label>
+                    <p class="control players-list">
+                        <PlayerSelect v-for="obj in players"
+                            :value="obj.value"
+                            :number="obj.number"
+                            :selectedValue="player"
+                            @updateSelected="updateSelected"></PlayerSelect>
                     </p>
 
                     <label class="label" for="acceleration_sensibility">
@@ -90,10 +61,10 @@
                     <p class="control">
                         <input type="range" min="2" max="4" step="0.5"
                             v-model="accelerationSensibility" />
-                        <span class="help">
+                        <span class="help is-large">
                             <div class="columns is-mobile">
                                 <div class="column">
-                                    Min: 2, Max: 4
+                                    Max: 2, Min: 4
                                 </div>
                                 <div class="column">
                                     Selected: {{ accelerationSensibility }}
@@ -105,7 +76,7 @@
                     <p class="control">
                         <button class="button is-primary is-large"
                             @click.prevent="save">Save</button>
-                        <button class="button is-info is-large"
+                        <button class="button is-info is-large is-pulled-right"
                             @click="goFullscreen">Go Fullscreen</button>
                     </p>
                 </div>
@@ -116,9 +87,13 @@
 
 <script>
 import lockScreen from '../utils/lock_screen'
+import PlayerSelect from '../components/PlayerSelect'
 
 export default {
     name: 'ConfigPage',
+    components: {
+        PlayerSelect
+    },
     data () {
         return {
             mqtt: {
@@ -131,7 +106,25 @@ export default {
                 profile: ''
             },
             player: '',
-            accelerationSensibility: 2
+            accelerationSensibility: 2,
+            players: [
+                {
+                    value: 'alice',
+                    number: 1
+                },
+                {
+                    value: 'bob',
+                    number: 2
+                },
+                {
+                    value: 'carol',
+                    number: 3
+                },
+                {
+                    value: 'david',
+                    number: 4
+                }
+            ]
         }
     },
     mounted () {
@@ -153,18 +146,23 @@ export default {
         },
         goFullscreen () {
             lockScreen()
+        },
+        updateSelected (value) {
+            this.player = value
         }
     }
 }
 </script>
 
 <style lang="css" scoped>
-label.radio > input {
-    z-index: -1;
-    opacity: 0;
+.help.is-large {
+    margin-top: 10px;
+    font-size: 1rem;
 }
-.radio--selected {
-    border: 2px solid #3273dc;
+.players-list {
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap;
 }
 input[type=range] {
     /*removes default webkit styles*/
