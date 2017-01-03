@@ -1,7 +1,7 @@
 <template lang="html">
     <div class="pad-container__arrows" :class="{'is-turning': turning}">
         <div v-once>
-            {{ val1 }}
+            {{ val }}
         </div>
     </div>
 </template>
@@ -25,12 +25,12 @@ export default {
             switch (this.position) {
             case 'left':
                 values = {
-                    val1: 'L'
+                    val: 'L'
                 }
                 break
             case 'right':
                 values = {
-                    val1: 'R'
+                    val: 'R'
                 }
                 break
             }
@@ -56,6 +56,7 @@ export default {
 .pad-container__arrows > div {
     align-self: center;
     color: #fff;
+    font-size: 22px;
 }
 
 .is-turning {

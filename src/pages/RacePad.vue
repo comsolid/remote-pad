@@ -104,7 +104,7 @@ export default {
         // Setup a 60fps interval - 15
         this.interval = setInterval(() => {
             this.send()
-        }, 40)
+        }, 30)
     },
     methods: {
         touchstart (command) {

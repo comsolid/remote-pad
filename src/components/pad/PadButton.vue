@@ -74,8 +74,8 @@ export default {
 }
 
 .md {
-    width: 130px;
-    height: 130px;
+    min-width: 130px;
+    min-height: 130px;
     background-color: #3273dc;
 }
 
