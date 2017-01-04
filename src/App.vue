@@ -9,4 +9,7 @@ export default {
 </script>
 
 <style>
+.animated {
+    animation-duration: .5s !important;
+}
 </style>

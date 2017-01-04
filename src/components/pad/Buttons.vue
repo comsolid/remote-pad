@@ -12,10 +12,12 @@
             <slot name="A"></slot>
             <slot name="up-down-buttons"></slot>
         </div>
-        <div class="row row-debug">
-            <slot name="indicator"></slot>
-            <span class="tag is-dark">Y axis: {{ Math.round(yAxis) }}</span>
-        </div>
+        <transition appear appear-active-class="animated slideInUp">
+            <div class="row row-debug">
+                <slot name="indicator"></slot>
+                <span class="tag is-dark">Y axis: {{ Math.round(yAxis) }}</span>
+            </div>
+        </transition>
     </div>
 </template>
 
