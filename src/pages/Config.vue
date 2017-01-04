@@ -1,95 +1,98 @@
 <template lang="html">
-    <section>
-        <section class="hero is-primary has-text-centered">
-            <div class="hero-body">
-                <div class="container">
-                    <h1 class="title">Configuration</h1>
-                </div>
-            </div>
-        </section>
-        <section class="section">
-            <div class="container">
-                <div class="content">
-                    <label class="label" for="mqtt_hostname">WebSocket Hostname</label>
-                    <p class="control">
-                        <input type="url" class="input" id="mqtt_hostname"
-                            v-model="mqtt.hostname" placeholder="ex. 192.168.0.1">
-                    </p>
-
-                    <label class="label" for="mqtt_port">Port</label>
-                    <p class="control">
-                        <input type="number" class="input" id="mqtt_port"
-                            v-model="mqtt.port">
-                    </p>
-
-                    <div class="columns is-mobile">
-                        <div class="column">
-                            <label class="label" for="pad_type">PAD Type</label>
-                            <p class="control">
-                                <span class="select">
-                                    <select id="pad_type" v-model="pad.type">
-                                        <option value="race">Race</option>
-                                    </select>
-                                </span>
-                            </p>
-                        </div>
-                        <div class="column">
-                            <label class="label" for="pad_profile">PAD Profile</label>
-                            <p class="control">
-                                <span class="select">
-                                    <select id="pad_profile" v-model="pad.profile">
-                                        <option value="snes--top_gear">SNES - Top Gear</option>
-                                        <option value="n64--mario_kart">N64 - Mario Kart</option>
-                                    </select>
-                                </span>
-                            </p>
-                        </div>
+    <transition
+        enter-active-class="animated slideInDown">
+        <div>
+            <section class="hero is-primary has-text-centered">
+                <div class="hero-body">
+                    <div class="container">
+                        <h1 class="title">Configuration</h1>
                     </div>
-
-                    <label class="label" for="player">Player</label>
-                    <p class="control players-list">
-                        <PlayerSelect v-for="obj in players"
-                            :value="obj.value"
-                            :number="obj.number"
-                            :selectedValue="player"
-                            @updateSelected="updateSelected"></PlayerSelect>
-                    </p>
-
-                    <label class="label" for="acceleration_sensibility">
-                        Acceleration Sensibility
-                    </label>
-                    <p class="control">
-                        <input type="range" min="2" max="4" step="0.5"
-                            v-model="accelerationSensibility" />
-                        <span class="help is-large">
-                            <div class="columns is-mobile">
-                                <div class="column">
-                                    Max: 2, Min: 4
-                                </div>
-                                <div class="column">
-                                    Selected: {{ accelerationSensibility }}
-                                </div>
-                            </div>
-                        </span>
-                    </p>
-
-                    <p class="control">
-                        <label class="checkbox">
-                            <input type="checkbox" v-model="pad.minimalLayout" />
-                            Pad - Minimal Layout?
-                        </label>
-                    </p>
-
-                    <p class="control">
-                        <button class="button is-primary is-large"
-                            @click.prevent="save">Save</button>
-                        <button class="button is-info is-large is-pulled-right"
-                            @click="goFullscreen">Go Fullscreen</button>
-                    </p>
                 </div>
-            </div>
-        </section>
-    </section>
+            </section>
+            <section class="section">
+                <div class="container">
+                    <div class="content">
+                        <label class="label" for="mqtt_hostname">WebSocket Hostname</label>
+                        <p class="control">
+                            <input type="url" class="input" id="mqtt_hostname"
+                                v-model="mqtt.hostname" placeholder="ex. 192.168.0.1">
+                        </p>
+
+                        <label class="label" for="mqtt_port">Port</label>
+                        <p class="control">
+                            <input type="number" class="input" id="mqtt_port"
+                                v-model="mqtt.port">
+                        </p>
+
+                        <div class="columns is-mobile">
+                            <div class="column">
+                                <label class="label" for="pad_type">PAD Type</label>
+                                <p class="control">
+                                    <span class="select">
+                                        <select id="pad_type" v-model="pad.type">
+                                            <option value="race">Race</option>
+                                        </select>
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="column">
+                                <label class="label" for="pad_profile">PAD Profile</label>
+                                <p class="control">
+                                    <span class="select">
+                                        <select id="pad_profile" v-model="pad.profile">
+                                            <option value="snes--top_gear">SNES - Top Gear</option>
+                                            <option value="n64--mario_kart">N64 - Mario Kart</option>
+                                        </select>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <label class="label" for="player">Player</label>
+                        <p class="control players-list">
+                            <PlayerSelect v-for="obj in players"
+                                :value="obj.value"
+                                :number="obj.number"
+                                :selectedValue="player"
+                                @updateSelected="updateSelected"></PlayerSelect>
+                        </p>
+
+                        <label class="label" for="acceleration_sensibility">
+                            Acceleration Sensibility
+                        </label>
+                        <p class="control">
+                            <input type="range" min="2" max="4" step="0.5"
+                            v-model="accelerationSensibility" />
+                            <span class="help is-large">
+                                <div class="columns is-mobile">
+                                    <div class="column">
+                                        Max: 2, Min: 4
+                                    </div>
+                                    <div class="column">
+                                        Selected: {{ accelerationSensibility }}
+                                    </div>
+                                </div>
+                            </span>
+                        </p>
+
+                        <p class="control">
+                            <label class="checkbox">
+                                <input type="checkbox" v-model="pad.minimalLayout" />
+                                Pad - Minimal Layout?
+                            </label>
+                        </p>
+
+                        <p class="control">
+                            <button class="button is-primary is-large"
+                                @click.prevent="save">Save</button>
+                            <button class="button is-info is-large is-pulled-right"
+                                @click="goFullscreen">Go Fullscreen</button>
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </transition>
 </template>
 
 <script>

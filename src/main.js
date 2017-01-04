@@ -7,6 +7,7 @@ import router from './router'
 import store from './store'
 
 import './assets/style.sass'
+import 'animate.css'
 
 Vue.use(VueRouter)
 

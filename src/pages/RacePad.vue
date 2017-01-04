@@ -2,7 +2,10 @@
     <section class="hero is-light is-fullheight">
         <div class="hero-head">
             <div class="pad-container">
-                <Direction position="left" :turning="isTurningLeft"></Direction>
+                <transition appear appear-active-class="animated slideInLeft">
+                    <Direction position="left"
+                        :turning="isTurningLeft"></Direction>
+                </transition>
                 <Buttons :yAxis="acceleration.y">
                     <ConnectedIndicator slot="indicator"
                         :isConnected="mqtt.isConnected"></ConnectedIndicator>
@@ -28,7 +31,9 @@
                             :touchend="touchend"></PadButton>
                     </div>
                 </Buttons>
-                <Direction position="right" :turning="isTurningRight"></Direction>
+                <transition appear appear-active-class="animated slideInRight">
+                    <Direction position="right" :turning="isTurningRight"></Direction>
+                </transition>
             </div>
         </div>
     </section>

@@ -1,10 +1,12 @@
 <template lang="html">
-    <div class="pad-button"
-        :class="[size, isTouching ? size + '--touch' : '']"
-        @touchstart.prevent="onTouchStarts"
-        @touchend.prevent="onTouchEnds">
-        <span v-once>{{ text }}</span>
-    </div>
+    <transition appear appear-active-class="animated zoomIn">
+        <div class="pad-button"
+            :class="[size, isTouching ? size + '--touch' : '']"
+            @touchstart.prevent="onTouchStarts"
+            @touchend.prevent="onTouchEnds">
+            <span v-once>{{ text }}</span>
+        </div>
+    </transition>
 </template>
 
 <script>
