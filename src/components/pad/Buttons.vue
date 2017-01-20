@@ -4,7 +4,12 @@
             <slot name="Y"></slot>
             <TogglePadButton></TogglePadButton>
             <router-link to="/config"
-                class="button is-inverted is-medium">Config</router-link>
+                class="button is-inverted is-medium">
+                <span class="icon">
+                    <span class="fa fa-cog"></span>
+                </span>
+                <span>Config</span>
+            </router-link>
             <slot name="X"></slot>
         </div>
         <div class="row row-2">
@@ -54,7 +59,6 @@ export default {
 
 .row-2 {
     justify-content: space-around;
-    color: #fff;
 }
 
 .row-debug {
@@ -62,7 +66,7 @@ export default {
 }
 
 .row-debug > span {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .row > div {

@@ -1,0 +1,45 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?i94kbs');
+  src:  url('fonts/icomoon.eot?i94kbs#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?i94kbs') format('truetype'),
+    url('fonts/icomoon.woff?i94kbs') format('woff'),
+    url('fonts/icomoon.svg?i94kbs#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="fa-"], [class*=" fa-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.fa-caret-down:before {
+  content: "\f0d7";
+}
+.fa-caret-up:before {
+  content: "\f0d8";
+}
+.fa-caret-left:before {
+  content: "\f0d9";
+}
+.fa-caret-right:before {
+  content: "\f0da";
+}
+.fa-cog:before {
+  content: "\f013";
+}
+.fa-expand:before {
+  content: "\f065";
+}
+
