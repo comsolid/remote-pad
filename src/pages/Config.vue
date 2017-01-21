@@ -2,7 +2,7 @@
     <transition
         enter-active-class="animated slideInDown">
         <div>
-            <section class="hero is-primary has-text-centered">
+            <section class="hero is-info has-text-centered">
                 <div class="hero-body">
                     <div class="container">
                         <h1 class="title">Configuration</h1>
@@ -31,6 +31,7 @@
                                     <span class="select">
                                         <select id="pad_type" v-model="pad.type">
                                             <option value="race">Race</option>
+                                            <option value="directional">Directional</option>
                                         </select>
                                     </span>
                                 </p>
@@ -62,7 +63,7 @@
                         </label>
                         <p class="control">
                             <input type="range" min="2" max="4" step="0.5"
-                            v-model="accelerationSensibility" />
+                                v-model="accelerationSensibility" />
                             <span class="help is-large">
                                 <div class="columns is-mobile">
                                     <div class="column">
@@ -85,8 +86,7 @@
                         <p class="control">
                             <button class="button is-primary is-large"
                                 @click.prevent="save">Save</button>
-                            <button class="button is-info is-large is-pulled-right"
-                                @click="goFullscreen">Go Fullscreen</button>
+                            <FullscreenButton :htmlClass="{ 'is-pulled-right': true }" />
                         </p>
                     </div>
                 </div>
@@ -96,13 +96,14 @@
 </template>
 
 <script>
-import lockScreen from '../utils/lock_screen'
+import FullscreenButton from '../components/FullscreenButton'
 import PlayerSelect from '../components/PlayerSelect'
 
 export default {
     name: 'ConfigPage',
     components: {
-        PlayerSelect
+        PlayerSelect,
+        FullscreenButton
     },
     data () {
         return {
@@ -153,10 +154,7 @@ export default {
                 player: this.player,
                 accelerationSensibility: this.accelerationSensibility
             })
-            this.$router.push({ path: '/' })
-        },
-        goFullscreen () {
-            lockScreen()
+            this.$router.push({ path: `/${this.pad.type}-pad` })
         },
         updateSelected (value) {
             this.player = value

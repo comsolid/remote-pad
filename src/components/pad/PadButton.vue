@@ -63,6 +63,7 @@ export default {
     min-width: 130px;
     min-height: 130px;
     background-color: #3273dc;
+    color: #fff;
     font-size: 22px;
 }
 .md--touch {
