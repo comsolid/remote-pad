@@ -53,7 +53,10 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
+label.radio {
+    margin-bottom: 10px;
+}
 label.radio > input {
     z-index: -1;
     opacity: 0;

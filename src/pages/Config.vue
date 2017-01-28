@@ -177,7 +177,9 @@ export default {
 .players-list {
     display: flex;
     justify-content: center;
-    flex-flow: wrap;
+    align-content: space-around;
+    align-items: stretch;
+    flex-wrap: wrap;
 }
 input[type=range] {
     /*removes default webkit styles*/
