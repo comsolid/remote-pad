@@ -6,7 +6,7 @@
                     <PadButton text="B" size="sm"
                         :touchstart="touchstart"
                         :touchend="touchend"></PadButton>
-                    <div class="">
+                    <div>
                         <TogglePadButton></TogglePadButton>
                         <router-link to="/config"
                             class="button is-inverted is-medium">

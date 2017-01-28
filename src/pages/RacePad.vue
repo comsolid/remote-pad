@@ -75,9 +75,7 @@ export default {
     },
     mounted () {
         if (window.DeviceMotionEvent !== undefined) {
-            window.ondevicemotion = (e) => {
-                this.acceleration.y = e.accelerationIncludingGravity.y || 0
-            }
+            window.addEventListener('devicemotion', this.onDeviceMotion, true)
         }
     },
     methods: {
@@ -89,6 +87,9 @@ export default {
         },
         isMinimalLayout () {
             return this.$store.state.pad.minimalLayout
+        },
+        onDeviceMotion (e) {
+            this.acceleration.y = e.accelerationIncludingGravity.y || 0
         }
     },
     computed: {
@@ -102,6 +103,9 @@ export default {
             Vue.set(this.keypress, 'right', this.acceleration.y > accelerationSensibility)
             return this.keypress.right
         }
+    },
+    beforeDestroy () {
+        window.removeEventListener('devicemotion', this.onDeviceMotion, true)
     }
 }
 </script>

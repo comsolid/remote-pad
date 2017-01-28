@@ -16,7 +16,7 @@ const store = new Vuex.Store({
             hostname: window.location.hostname,
             port: 1884
         },
-        accelerationSensibility: 2
+        accelerationSensibility: 3.5
     },
     mutations: {
         config (state, payload) {
