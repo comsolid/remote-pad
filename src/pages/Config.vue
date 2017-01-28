@@ -61,18 +61,19 @@
                         <label class="label" for="acceleration_sensibility">
                             Acceleration Sensibility
                         </label>
-                        <p class="control">
-                            <input type="range" min="2" max="4" step="0.5"
+                        <p class="control has-addons">
+                            <span class="button is-white" v-once>
+                                Max: {{accelerationRange.min}}
+                            </span>
+                            <input type="range" :min="accelerationRange.min"
+                                :max="accelerationRange.max"
+                                :step="accelerationRange.step"
                                 v-model="accelerationSensibility" />
-                            <span class="help is-large">
-                                <div class="columns is-mobile">
-                                    <div class="column">
-                                        Max: 2, Min: 4
-                                    </div>
-                                    <div class="column">
-                                        Selected: {{ accelerationSensibility }}
-                                    </div>
-                                </div>
+                            <span class="button is-white" v-once>
+                                Min: {{accelerationRange.max}}
+                            </span>
+                            <span class="button is-white">
+                                Selected: {{ accelerationSensibility }}
                             </span>
                         </p>
 
@@ -118,7 +119,12 @@ export default {
                 minimalLayout: true
             },
             player: '',
-            accelerationSensibility: 2,
+            accelerationSensibility: 3.5,
+            accelerationRange: {
+                min: 2,
+                max: 5,
+                step: 0.5
+            },
             players: [
                 {
                     value: 'alice',
