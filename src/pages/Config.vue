@@ -41,8 +41,8 @@
                                 <p class="control">
                                     <span class="select">
                                         <select id="pad_profile" v-model="pad.profile">
-                                            <option value="snes--top_gear">SNES - Top Gear</option>
-                                            <option value="n64--mario_kart">N64 - Mario Kart</option>
+                                            <option value="snes--default">SNES - Default</option>
+                                            <option value="n64--default">N64 - Default</option>
                                         </select>
                                     </span>
                                 </p>
