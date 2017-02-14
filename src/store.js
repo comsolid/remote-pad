@@ -9,7 +9,7 @@ const store = new Vuex.Store({
         pad: {
             enabled: false,
             type: 'race',
-            profile: 'snes--top_gear',
+            profile: 'n64--default',
             minimalLayout: true
         },
         mqtt: {
