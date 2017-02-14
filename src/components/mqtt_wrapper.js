@@ -58,6 +58,13 @@ export default {
                 this.lastCommandSent = command
                 this.mqtt.client.publish(this.mqtt.topic, command)
             }
+        },
+        createMask (values) {
+            var nMask = 0, nFlag = 0
+            for (let key in values) {
+                nMask |= values[key] << nFlag++
+            }
+            return nMask
         }
     },
     beforeDestroy () {
