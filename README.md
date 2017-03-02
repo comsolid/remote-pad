@@ -5,7 +5,7 @@ as if it were the keyboard to a MQTT Broker
 [remote-pad-server](https://github.com/comsolid/remote-pad-server).
 
 The ideia is to create a virtual gamepad for example for a race game, like
-Top Gear, send commands to the server that will proper execute the keyboard
+Top Gear or Mario Kart 64, send commands to the server that will proper execute the keyboard
 keys: left and right, A, B, etc.
 
 ## Race Pad page example
@@ -13,11 +13,22 @@ keys: left and right, A, B, etc.
 ![racepad-page](docs/img/racepad-page.png)
 
 In the example the `Y axis` of the accelerometer is used as the input for left
-and right. And the buttons are use to send the equivalent keys of a SNES gamepad.
+and right. And the buttons are use to send the equivalent keys of a emulator input keys.
 
 ![architecture](docs/img/architecture.png)
 
+## Directional Pad
+
+![diretional-pad-page](docs/img/directional-pad-page.png)
+
+Good for games like SNES Bomberman, N64 Mario Tennis.
+
 ## Getting Started
+
+You can install [Remote Pad GUI](https://github.com/comsolid/remote-pad-gui)
+to start a desktop app.
+
+## Development
 
 ``` bash
 # install dependencies

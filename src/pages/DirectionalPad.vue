@@ -28,16 +28,18 @@
                         :down="keypress.down"
                         :pan="pan"
                         :panend="panend" />
-                    <div class="row-2-helper">
-                        <PadButton slot="Y" text="Y" size="sm"
+                    <div class="row-2-right">
+                        <div class="row-2-helper">
+                            <PadButton slot="Y" text="Y" size="sm"
                             :touchstart="touchstart"
                             :touchend="touchend"></PadButton>
-                        <ConnectedIndicator slot="indicator"
+                            <ConnectedIndicator slot="indicator"
                             :isConnected="mqtt.isConnected"></ConnectedIndicator>
-                    </div>
-                    <PadButton text="A" size="md"
+                        </div>
+                        <PadButton text="A" size="md"
                         :touchstart="touchstart"
                         :touchend="touchend"></PadButton>
+                    </div>
                 </div>
             </div>
         </div>
@@ -51,7 +53,6 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import PadButton from '../components/pad/PadButton'
 import TogglePadButton from '../components/TogglePad'
 import Directional from '../components/pad/Directional'
@@ -85,22 +86,22 @@ export default {
     },
     methods: {
         touchstart (command) {
-            Vue.set(this.keypress, command, true)
+            this.keypress[command] = true
         },
         touchend (command) {
-            Vue.set(this.keypress, command, false)
+            this.keypress[command] = false
         },
         pan (command, opposite) {
-            Vue.set(this.keypress, command, true)
+            this.keypress[command] = true
             // guarantee that opposite buttons can't be enabled
             // at the same time
-            Vue.set(this.keypress, opposite, false)
+            this.keypress[opposite] = false
         },
         panend () {
-            Vue.set(this.keypress, 'up', false)
-            Vue.set(this.keypress, 'down', false)
-            Vue.set(this.keypress, 'left', false)
-            Vue.set(this.keypress, 'right', false)
+            this.keypress.up = false
+            this.keypress.down = false
+            this.keypress.left = false
+            this.keypress.right = false
         }
     }
 }
@@ -108,10 +109,10 @@ export default {
 
 <style lang="css" scoped>
 .pad-container {
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;
 }
 .row-1, .row-2 {
     display: flex;
@@ -119,10 +120,16 @@ export default {
     align-items: center;
     padding: 10px 16px;
 }
+.row-2-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 .row-2-helper {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 50vh;
+    height: 50vh;
+    margin: auto 20px;
 }
 </style>

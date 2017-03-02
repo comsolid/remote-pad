@@ -54,14 +54,14 @@ export default {
 <style lang="css" scoped>
 .pad-button {
     border-radius: 50%;
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.50);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .md {
-    min-width: 130px;
-    min-height: 130px;
+    width: 130px;
+    height: 130px;
     background-color: #3273dc;
     color: #fff;
     font-size: 22px;
