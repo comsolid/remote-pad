@@ -36,6 +36,12 @@
                 </transition>
             </div>
         </div>
+        <modal-message
+            :message="message.text"
+            :messageType="message.type"
+            :isActive="message.show"
+            @close="clearMessage"
+        ></modal-message>
     </section>
 </template>
 
@@ -45,6 +51,7 @@ import Direction from '../components/pad/Direction'
 import Buttons from '../components/pad/Buttons'
 import PadButton from '../components/pad/PadButton'
 import ConnectedIndicator from '../components/ConnectedIndicator'
+import ModalMessage from '../components/ModalMessage'
 import MqttWrapper from '../components/mqtt_wrapper'
 
 export default {
@@ -53,7 +60,8 @@ export default {
         Direction,
         Buttons,
         PadButton,
-        ConnectedIndicator
+        ConnectedIndicator,
+        ModalMessage
     },
     extends: MqttWrapper,
     data () {

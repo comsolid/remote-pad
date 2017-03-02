@@ -7,7 +7,7 @@ import VueTouch from 'vue-touch'
 import router from './router'
 import store from './store'
 
-import './assets/style.sass'
+import 'bulma'
 import 'animate.css'
 import './assets/custom-fonts/style.css'
 

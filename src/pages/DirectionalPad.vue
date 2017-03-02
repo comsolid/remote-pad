@@ -41,6 +41,12 @@
                 </div>
             </div>
         </div>
+        <modal-message
+            :message="message.text"
+            :messageType="message.type"
+            :isActive="message.show"
+            @close="clearMessage"
+        ></modal-message>
     </section>
 </template>
 
@@ -50,6 +56,7 @@ import PadButton from '../components/pad/PadButton'
 import TogglePadButton from '../components/TogglePad'
 import Directional from '../components/pad/Directional'
 import ConnectedIndicator from '../components/ConnectedIndicator'
+import ModalMessage from '../components/ModalMessage'
 import MqttWrapper from '../components/mqtt_wrapper'
 
 export default {
@@ -58,7 +65,8 @@ export default {
         PadButton,
         TogglePadButton,
         Directional,
-        ConnectedIndicator
+        ConnectedIndicator,
+        ModalMessage
     },
     extends: MqttWrapper,
     data () {
@@ -72,12 +80,6 @@ export default {
                 right: false,
                 up: false,
                 down: false
-            },
-            mqtt: {
-                client: null,
-                topic: '',
-                profile: 'race',
-                isConnected: false
             }
         }
     },
