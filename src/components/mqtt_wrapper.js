@@ -10,7 +10,12 @@ export default {
                 topic: '',
                 isConnected: false
             },
-            lastCommandSent: null
+            lastCommandSent: null,
+            message: {
+                text: '',
+                type: '',
+                show: false
+            }
         }
     },
     mounted () {
@@ -34,6 +39,7 @@ export default {
             console.info(`Connected to ${url}`)
             this.mqtt.isConnected = true
             this.mqtt.client.subscribe(this.mqtt.topic)
+            this.mqtt.client.subscribe(`message/${player}`)
 
             const settings = JSON.stringify({pad: this.$store.state.pad})
             this.mqtt.client.publish(`settings/${player}`, settings)
@@ -42,6 +48,15 @@ export default {
         this.mqtt.client.on('close', () => {
             console.info('Disconnected')
             this.mqtt.isConnected = false
+        })
+
+        this.mqtt.client.on('message', (topic, payload) => {
+            if (topic === `message/${player}`) {
+                const result = JSON.parse(payload.toString())
+                this.message.text = result.message
+                this.message.type = result.messageType
+                this.message.show = true
+            }
         })
 
         // Setup a 60fps interval - 15
@@ -58,6 +73,11 @@ export default {
                 this.lastCommandSent = command
                 this.mqtt.client.publish(this.mqtt.topic, command)
             }
+        },
+        clearMessage () {
+            this.message.text = ''
+            this.message.type = ''
+            this.message.show = false
         }
     },
     beforeDestroy () {
