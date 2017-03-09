@@ -45,7 +45,10 @@ export default {
 
 <style lang="css" scoped>
 .pad-container__buttons {
+    display: flex;
+    flex-direction: column;
     flex-grow: 6;
+    justify-content: center;
 }
 
 .row {

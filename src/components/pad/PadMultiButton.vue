@@ -2,16 +2,14 @@
     <transition appear appear-active-class="animated flipInX">
         <v-touch
             @pan="onPan"
-            @panend="onPanEnd">
-            <div class="directional">
+            @panend="onPanEnd"
+            @tap="onTouchStarts">
+            <div class="directional"
+                :class="[isTouching ? 'directional--touch' : '']">
                 <span class="fa-caret-up fa-2x"
                     :class="{pressed: up}"></span>
-                <div class="left-right">
-                    <span class="fa-caret-left fa-2x"
-                        :class="{pressed: left}"></span>
-                    <span class="helper-text">pan</span>
-                    <span class="fa-caret-right fa-2x"
-                        :class="{pressed: right}"></span>
+                <div class="main-button" v-once>
+                    {{text}}
                 </div>
                 <span class="fa-caret-down fa-2x"
                     :class="{pressed: down}"></span>
@@ -24,22 +22,18 @@
 import Hammer from 'hammerjs'
 
 export default {
-    name: 'Directional',
+    name: 'pad-multi-button',
     props: {
-        left: {
-            type: Boolean,
-            required: true
-        },
-        right: {
-            type: Boolean,
-            required: true
-        },
         up: {
             type: Boolean,
             required: true
         },
         down: {
             type: Boolean,
+            required: true
+        },
+        text: {
+            type: String,
             required: true
         },
         pan: {
@@ -49,21 +43,38 @@ export default {
         panend: {
             type: Function,
             required: true
+        },
+        touchstart: {
+            type: Function,
+            required: true
+        },
+        touchend: {
+            type: Function,
+            required: true
+        }
+    },
+    data () {
+        return {
+            isTouching: false
         }
     },
     methods: {
+        onTouchStarts (e) {
+            this.isTouching = true
+            this.touchstart(this.text)
+            setTimeout(() => {
+                this.onTouchEnds()
+            }, 40)
+        },
+        onTouchEnds (e) {
+            this.isTouching = false
+            this.touchend(this.text)
+        },
         onPan (e) {
             const { direction } = e
-            if (direction === Hammer.DIRECTION_RIGHT) {
-                this.pan('right', 'left')
-            }
 
             if (direction === Hammer.DIRECTION_DOWN) {
                 this.pan('down', 'up')
-            }
-
-            if (direction === Hammer.DIRECTION_LEFT) {
-                this.pan('left', 'right')
             }
 
             if (direction === Hammer.DIRECTION_UP) {
@@ -79,8 +90,8 @@ export default {
 
 <style lang="css" scoped>
 .directional {
-    width: 200px;
-    height: 180px;
+    width: 150px;
+    height: 130px;
     background-color: #3273dc;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.50);
     border-radius: 5px;
@@ -90,14 +101,14 @@ export default {
     align-items: center;
     padding: 5px 10px;
 }
-.fa-2x, .helper-text {
+.directional--touch {
+    background-color: #0040A9;
+}
+.fa-2x, .main-button {
     color: #ecf0f1;
 }
-.left-right {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.main-button {
+    font-size: 22px;
 }
 .pressed {
     color: #ffdd57;

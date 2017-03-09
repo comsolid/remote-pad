@@ -9,8 +9,7 @@ const store = new Vuex.Store({
         pad: {
             enabled: false,
             type: 'race',
-            profile: 'n64--default',
-            minimalLayout: true
+            profile: 'n64--default'
         },
         mqtt: {
             hostname: window.location.hostname,

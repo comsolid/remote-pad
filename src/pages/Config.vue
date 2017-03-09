@@ -78,13 +78,6 @@
                         </p>
 
                         <p class="control">
-                            <label class="checkbox">
-                                <input type="checkbox" v-model="pad.minimalLayout" />
-                                Pad - Minimal Layout?
-                            </label>
-                        </p>
-
-                        <p class="control">
                             <button class="button is-primary is-large"
                                 @click.prevent="save">Save</button>
                             <FullscreenButton :htmlClass="{ 'is-pulled-right': true }" />
@@ -115,8 +108,7 @@ export default {
             pad: {
                 type: '',
                 enabled: false,
-                profile: '',
-                minimalLayout: true
+                profile: ''
             },
             player: '',
             accelerationSensibility: 3.5,

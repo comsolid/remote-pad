@@ -18,18 +18,14 @@
                     <PadButton slot="B" text="B" size="md"
                         :touchstart="touchstart"
                         :touchend="touchend"></PadButton>
-                    <PadButton slot="A" text="A" size="md"
+                    <pad-multi-button slot="A" text="A"
+                        :up="keypress.up"
+                        :down="keypress.down"
                         :touchstart="touchstart"
-                        :touchend="touchend"></PadButton>
-                    <div slot="up-down-buttons" class="up-down-buttons"
-                        v-show="!isMinimalLayout()">
-                        <PadButton text="up" size="xs"
-                            :touchstart="touchstart"
-                            :touchend="touchend"></PadButton>
-                        <PadButton text="down" size="xs"
-                            :touchstart="touchstart"
-                            :touchend="touchend"></PadButton>
-                    </div>
+                        :touchend="touchend"
+                        :pan="pan"
+                        :panend="panend">
+                    </pad-multi-button>
                 </Buttons>
                 <transition appear appear-active-class="animated slideInRight">
                     <Direction position="right" :turning="isTurningRight"></Direction>
@@ -46,74 +42,46 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import Direction from '../components/pad/Direction'
 import Buttons from '../components/pad/Buttons'
 import PadButton from '../components/pad/PadButton'
 import ConnectedIndicator from '../components/ConnectedIndicator'
 import ModalMessage from '../components/ModalMessage'
 import MqttWrapper from '../components/mqtt_wrapper'
+import RacePadWrapper from '../components/RacePadWrapper'
+import PadMultiButton from '../components/pad/PadMultiButton'
 
 export default {
-    name: 'RacePadPage',
+    name: 'race-pad',
     components: {
         Direction,
         Buttons,
         PadButton,
         ConnectedIndicator,
+        PadMultiButton,
         ModalMessage
     },
-    extends: MqttWrapper,
-    data () {
-        return {
-            acceleration: {
-                y: 0
-            },
-            keypress: {
-                Y: false,
-                X: false,
-                B: false,
-                A: false,
-                left: false,
-                right: false,
-                up: false,
-                down: false
-            }
-        }
-    },
-    mounted () {
-        if (window.DeviceMotionEvent !== undefined) {
-            window.addEventListener('devicemotion', this.onDeviceMotion, true)
-        }
-    },
+    mixins: [
+        MqttWrapper,
+        RacePadWrapper
+    ],
     methods: {
         touchstart (command) {
-            Vue.set(this.keypress, command, true)
+            this.keypress[command] = true
         },
         touchend (command) {
-            Vue.set(this.keypress, command, false)
+            this.keypress[command] = false
         },
-        isMinimalLayout () {
-            return this.$store.state.pad.minimalLayout
+        pan (command, opposite) {
+            this.keypress[command] = true
+            // guarantee that opposite buttons can't be enabled
+            // at the same time
+            this.keypress[opposite] = false
         },
-        onDeviceMotion (e) {
-            this.acceleration.y = e.accelerationIncludingGravity.y || 0
+        panend () {
+            this.keypress.up = false
+            this.keypress.down = false
         }
-    },
-    computed: {
-        isTurningLeft () {
-            const { accelerationSensibility } = this.$store.state
-            Vue.set(this.keypress, 'left', this.acceleration.y < accelerationSensibility * -1)
-            return this.keypress.left
-        },
-        isTurningRight () {
-            const { accelerationSensibility } = this.$store.state
-            Vue.set(this.keypress, 'right', this.acceleration.y > accelerationSensibility)
-            return this.keypress.right
-        }
-    },
-    beforeDestroy () {
-        window.removeEventListener('devicemotion', this.onDeviceMotion, true)
     }
 }
 </script>
@@ -121,10 +89,6 @@ export default {
 <style lang="css" scoped>
 .pad-container {
     display: flex;
-    min-height: 100vh;
-}
-.up-down-buttons {
-    display: flex;
-    flex-direction: column;
+    height: 100vh;
 }
 </style>

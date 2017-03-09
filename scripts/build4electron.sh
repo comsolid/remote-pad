@@ -10,7 +10,7 @@ if [[ -d electron ]]; then
 fi
 mkdir -p electron
 echo "Copying files..."
-cp -r dist production package.json yarn.lock electron
+cp -r dist production package.json yarn.lock LICENSE README.md electron
 cd electron
 yarn install --production
 cd -
