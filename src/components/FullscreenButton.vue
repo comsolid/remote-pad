@@ -1,11 +1,11 @@
 <template lang="html">
-    <button class="button is-info is-large" :class="htmlClass"
-        @click="goFullscreen">
+    <a class="button" :class="htmlClass"
+        @click.prevent="goFullscreen">
         <span class="icon">
             <span class="fa fa-expand"></span>
         </span>
-        <span>Go Fullscreen</span>
-    </button>
+        <span v-if="hasText">Go Fullscreen</span>
+    </a>
 </template>
 
 <script>
@@ -13,7 +13,11 @@ import lockScreen from '../utils/lock_screen'
 
 export default {
     props: {
-        htmlClass: ''
+        htmlClass: '',
+        hasText: {
+            type: Boolean,
+            default: true
+        }
     },
     methods: {
         goFullscreen () {

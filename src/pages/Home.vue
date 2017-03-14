@@ -11,9 +11,9 @@
                 <h2 class="subtitle">
                     Click in the Config button to get started.
                 </h2>
-                <div class="columns is-mobile">
+                <div class="columns">
                     <div class="column">
-                        <FullscreenButton :htmlClass="{ 'is-inverted': true }" />
+                        <FullscreenButton :htmlClass="fullscreen" />
                     </div>
                     <div class="column">
                         <router-link to="/config"
@@ -47,6 +47,15 @@ export default {
     name: 'HomePage',
     components: {
         FullscreenButton
+    },
+    data () {
+        return {
+            fullscreen: {
+                'is-inverted': true,
+                'is-large': true,
+                'is-info': true
+            }
+        }
     }
 }
 </script>

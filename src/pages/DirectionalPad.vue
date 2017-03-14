@@ -6,16 +6,7 @@
                     <PadButton text="B" size="sm"
                         :touchstart="touchstart"
                         :touchend="touchend"></PadButton>
-                    <div>
-                        <TogglePadButton></TogglePadButton>
-                        <router-link to="/config"
-                            class="button is-inverted is-medium">
-                            <span class="icon">
-                                <span class="fa fa-cog"></span>
-                            </span>
-                            <span>Config</span>
-                        </router-link>
-                    </div>
+                    <pad-options></pad-options>
                     <PadButton text="X" size="sm"
                         :touchstart="touchstart"
                         :touchend="touchend"></PadButton>
@@ -54,7 +45,7 @@
 
 <script>
 import PadButton from '../components/pad/PadButton'
-import TogglePadButton from '../components/TogglePad'
+import PadOptions from '../components/PadOptions'
 import Directional from '../components/pad/Directional'
 import ConnectedIndicator from '../components/ConnectedIndicator'
 import ModalMessage from '../components/ModalMessage'
@@ -64,7 +55,7 @@ export default {
     name: 'DirectionalPadPage',
     components: {
         PadButton,
-        TogglePadButton,
+        PadOptions,
         Directional,
         ConnectedIndicator,
         ModalMessage
