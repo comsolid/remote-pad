@@ -2,54 +2,11 @@
     <transition
         enter-active-class="animated slideInDown">
         <div>
-            <section class="hero is-info has-text-centered">
-                <div class="hero-body">
-                    <div class="container">
-                        <h1 class="title">Configuration</h1>
-                    </div>
-                </div>
-            </section>
+            <navigation active="config"></navigation>
             <section class="section">
                 <div class="container">
                     <div class="content">
-                        <label class="label" for="mqtt_hostname">WebSocket Hostname</label>
-                        <p class="control">
-                            <input type="url" class="input" id="mqtt_hostname"
-                                v-model="mqtt.hostname" placeholder="ex. 192.168.0.1">
-                        </p>
-
-                        <label class="label" for="mqtt_port">Port</label>
-                        <p class="control">
-                            <input type="number" class="input" id="mqtt_port"
-                                v-model="mqtt.port">
-                        </p>
-
-                        <div class="columns is-mobile">
-                            <div class="column">
-                                <label class="label" for="pad_type">PAD Type</label>
-                                <p class="control">
-                                    <span class="select">
-                                        <select id="pad_type" v-model="pad.type">
-                                            <option value="race">Race</option>
-                                            <option value="directional">Directional</option>
-                                        </select>
-                                    </span>
-                                </p>
-                            </div>
-                            <div class="column">
-                                <label class="label" for="pad_profile">PAD Profile</label>
-                                <p class="control">
-                                    <span class="select">
-                                        <select id="pad_profile" v-model="pad.profile">
-                                            <option value="snes--default">SNES - Default</option>
-                                            <option value="n64--default">N64 - Default</option>
-                                        </select>
-                                    </span>
-                                </p>
-                            </div>
-                        </div>
-
-                        <label class="label" for="player">Player</label>
+                        <label class="label" for="player">Select your Player</label>
                         <p class="control players-list">
                             <PlayerSelect v-for="obj in players"
                                 :value="obj.value"
@@ -58,29 +15,59 @@
                                 @updateSelected="updateSelected"></PlayerSelect>
                         </p>
 
-                        <label class="label" for="acceleration_sensibility">
-                            Acceleration Sensibility
-                        </label>
-                        <p class="control has-addons">
-                            <span class="button is-white" v-once>
-                                Max: {{accelerationRange.min}}
-                            </span>
-                            <input type="range" :min="accelerationRange.min"
-                                :max="accelerationRange.max"
-                                :step="accelerationRange.step"
-                                v-model="accelerationSensibility" />
-                            <span class="button is-white" v-once>
-                                Min: {{accelerationRange.max}}
-                            </span>
-                            <span class="button is-white">
-                                Selected: {{ accelerationSensibility }}
+                        <label class="label" for="pad_type">PAD Type</label>
+                        <p class="control">
+                            <span class="select is-medium">
+                                <select id="pad_type" v-model="pad.type">
+                                    <option value="race">Race</option>
+                                    <option value="directional">Directional</option>
+                                </select>
                             </span>
                         </p>
+
+                        <div class="has-margin-bottom" v-show="pad.type === 'race'">
+                            <label class="label" for="acceleration_sensibility">
+                                Acceleration Sensibility
+                            </label>
+                            <p class="control has-addons">
+                                <span class="button is-white" v-once>
+                                    Max: {{accelerationRange.min}}
+                                </span>
+                                <input type="range" :min="accelerationRange.min"
+                                    :max="accelerationRange.max"
+                                    :step="accelerationRange.step"
+                                    v-model="accelerationSensibility" />
+                                <span class="button is-white" v-once>
+                                    Min: {{accelerationRange.max}}
+                                </span>
+                                <span class="button is-white">
+                                    Selected: {{ accelerationSensibility }}
+                                </span>
+                            </p>
+                        </div>
+
+                        <button class="button" @click="toggleAdvancedOptions">Toggle Advanced Options</button>
+                        <hr>
+                        <div v-if="options.enabled">
+                            <label class="label" for="mqtt_hostname">WebSocket Hostname</label>
+                            <p class="control">
+                                <input type="url" class="input" id="mqtt_hostname"
+                                    v-model="mqtt.hostname" placeholder="ex. 192.168.0.1">
+                            </p>
+
+                            <label class="label" for="mqtt_port">Port</label>
+                            <p class="control">
+                                <input type="number" class="input" id="mqtt_port"
+                                    v-model="mqtt.port">
+                            </p>
+                            <hr>
+                        </div>
 
                         <p class="control">
                             <button class="button is-primary is-large"
                                 @click.prevent="save">Save</button>
-                            <FullscreenButton :htmlClass="{ 'is-pulled-right': true }" />
+                            <FullscreenButton
+                                :htmlClass="fullscreen" />
                         </p>
                     </div>
                 </div>
@@ -92,12 +79,14 @@
 <script>
 import FullscreenButton from '../components/FullscreenButton'
 import PlayerSelect from '../components/PlayerSelect'
+import Navigation from '../components/Navigation'
 
 export default {
     name: 'ConfigPage',
     components: {
         PlayerSelect,
-        FullscreenButton
+        FullscreenButton,
+        Navigation
     },
     data () {
         return {
@@ -105,16 +94,18 @@ export default {
                 hostname: '',
                 port: 0
             },
+            options: {
+                enabled: false
+            },
             pad: {
                 type: '',
-                enabled: false,
-                profile: ''
+                enabled: false
             },
             player: '',
-            accelerationSensibility: 3.5,
+            accelerationSensibility: 4,
             accelerationRange: {
-                min: 2,
-                max: 5,
+                min: 3,
+                max: 6,
                 step: 0.5
             },
             players: [
@@ -134,7 +125,12 @@ export default {
                     value: 'david',
                     number: 4
                 }
-            ]
+            ],
+            fullscreen: {
+                'is-pulled-right': true,
+                'is-large': true,
+                'is-info': true
+            }
         }
     },
     mounted () {
@@ -156,6 +152,9 @@ export default {
         },
         updateSelected (value) {
             this.player = value
+        },
+        toggleAdvancedOptions () {
+            this.options.enabled = !this.options.enabled
         }
     }
 }
@@ -223,5 +222,8 @@ input[type=range]::-moz-range-thumb {
 input[type=range]:-moz-focusring{
     outline: 1px solid white;
     outline-offset: -1px;
+}
+.has-margin-bottom {
+    margin-bottom: 1em;
 }
 </style>

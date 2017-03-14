@@ -79,8 +79,8 @@ export default {
 
 <style lang="css" scoped>
 .directional {
-    width: 200px;
-    height: 180px;
+    width: 180px;
+    height: 160px;
     background-color: #3273dc;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.50);
     border-radius: 5px;

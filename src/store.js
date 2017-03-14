@@ -8,14 +8,13 @@ const store = new Vuex.Store({
         player: 'alice',
         pad: {
             enabled: false,
-            type: 'race',
-            profile: 'n64--default'
+            type: 'race'
         },
         mqtt: {
             hostname: window.location.hostname,
             port: 1884
         },
-        accelerationSensibility: 3.5
+        accelerationSensibility: 4
     },
     mutations: {
         config (state, payload) {
