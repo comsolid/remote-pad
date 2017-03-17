@@ -12,6 +12,7 @@
 import lockScreen from '../utils/lock_screen'
 
 export default {
+    name: 'FullscreenButton',
     props: {
         htmlClass: '',
         hasText: {
