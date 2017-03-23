@@ -1,5 +1,7 @@
 <template lang="html">
-    <div class="pad-container__arrows" :class="{'is-turning': turning}">
+    <div class="pad-container__arrows"
+        :class="{'is-turning': turning}"
+        :style="{'background-color': bgColor, color: fgColor}">
         <div v-once>
             {{ val }}
         </div>
@@ -17,6 +19,12 @@ export default {
         turning: {
             type: Boolean,
             required: true
+        },
+        bgColor: {
+            type: String
+        },
+        fgColor: {
+            type: String
         }
     },
     data () {
@@ -49,13 +57,11 @@ export default {
     flex-grow: 1;
     align-self: stretch;
     align-items: stretch;
-    background: #3273dc;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
 }
 
 .pad-container__arrows > div {
     align-self: center;
-    color: #fff;
     font-size: 22px;
 }
 

@@ -3,7 +3,8 @@
         <v-touch
             @pan="onPan"
             @panend="onPanEnd">
-            <div class="directional">
+            <div class="directional"
+                :style="{'background-color': bgColor}">
                 <span class="fa-caret-up fa-2x"
                     :class="{pressed: up}"></span>
                 <div class="left-right">
@@ -49,6 +50,10 @@ export default {
         panend: {
             type: Function,
             required: true
+        },
+        bgColor: {
+            type: String,
+            required: true
         }
     },
     methods: {
@@ -81,7 +86,6 @@ export default {
 .directional {
     width: 180px;
     height: 160px;
-    background-color: #3273dc;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.50);
     border-radius: 5px;
     display: flex;

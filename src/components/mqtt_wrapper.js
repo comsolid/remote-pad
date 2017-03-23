@@ -40,6 +40,7 @@ export default {
             this.mqtt.isConnected = true
             this.mqtt.client.subscribe(this.mqtt.topic)
             this.mqtt.client.subscribe(`message/${player}`)
+            this.mqtt.client.subscribe(`profile/${player}`)
 
             const settings = JSON.stringify({pad: this.$store.state.pad})
             this.mqtt.client.publish(`settings/${player}`, settings)
@@ -56,6 +57,9 @@ export default {
                 this.message.text = result.message
                 this.message.type = result.messageType
                 this.message.show = true
+            } else if (topic === `profile/${player}`) {
+                const result = JSON.parse(payload.toString())
+                this.$store.commit('updateProfile', result.profile)
             }
         })
 

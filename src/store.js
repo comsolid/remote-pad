@@ -14,7 +14,8 @@ const store = new Vuex.Store({
             hostname: window.location.hostname,
             port: 1884
         },
-        accelerationSensibility: 4
+        accelerationSensibility: 4,
+        profile: 'psx--default'
     },
     mutations: {
         config (state, payload) {
@@ -25,6 +26,23 @@ const store = new Vuex.Store({
         },
         togglePad (state) {
             state.pad.enabled = !state.pad.enabled
+        },
+        updateProfile (state, profile) {
+            state.profile = profile
+        }
+    },
+    getters: {
+        laf (state) {
+            switch (state.profile) {
+            case 'n64--default':
+                return require(`./store/laf/${state.pad.type}/n64--default`)
+            case 'psx--default':
+                return require(`./store/laf/${state.pad.type}/psx--default`)
+            case 'snes--default':
+                return require(`./store/laf/${state.pad.type}/snes--default`)
+            default:
+                return require(`./store/laf/${state.pad.type}/default`)
+            }
         }
     }
 })

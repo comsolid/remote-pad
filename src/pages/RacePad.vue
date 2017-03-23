@@ -4,21 +4,35 @@
             <div class="pad-container">
                 <transition appear appear-active-class="animated slideInLeft">
                     <Direction position="left"
+                        :bgColor="laf.left.bgColor"
+                        :fgColor="laf.left.fgColor"
                         :turning="isTurningLeft"></Direction>
                 </transition>
                 <Buttons :yAxis="acceleration.y">
                     <ConnectedIndicator slot="indicator"
                         :isConnected="mqtt.isConnected"></ConnectedIndicator>
-                    <PadButton slot="Y" text="Y" size="sm"
+                    <PadButton slot="Y" keyb="Y" size="sm"
+                        :label="laf.btnY.label"
+                        :bgColor="laf.btnY.bgColor"
+                        :fgColor="laf.btnY.fgColor"
                         :touchstart="touchstart"
                         :touchend="touchend"></PadButton>
-                    <PadButton slot="X" text="X" size="sm"
+                    <PadButton slot="X" keyb="X" size="sm"
+                        :label="laf.btnX.label"
+                        :bgColor="laf.btnX.bgColor"
+                        :fgColor="laf.btnX.fgColor"
                         :touchstart="touchstart"
                         :touchend="touchend"></PadButton>
-                    <PadButton slot="B" text="B" size="md"
+                    <PadButton slot="B" keyb="B" size="md"
+                        :label="laf.btnB.label"
+                        :bgColor="laf.btnB.bgColor"
+                        :fgColor="laf.btnB.fgColor"
                         :touchstart="touchstart"
                         :touchend="touchend"></PadButton>
-                    <pad-multi-button slot="A" text="A"
+                    <pad-multi-button slot="A" keyb="A"
+                        :label="laf.btnA.label"
+                        :bgColor="laf.btnA.bgColor"
+                        :fgColor="laf.btnA.fgColor"
                         :up="keypress.up"
                         :down="keypress.down"
                         :touchstart="touchstart"
@@ -28,7 +42,10 @@
                     </pad-multi-button>
                 </Buttons>
                 <transition appear appear-active-class="animated slideInRight">
-                    <Direction position="right" :turning="isTurningRight"></Direction>
+                    <Direction position="right"
+                        :turning="isTurningRight"
+                        :bgColor="laf.right.bgColor"
+                        :fgColor="laf.right.fgColor"></Direction>
                 </transition>
             </div>
         </div>
@@ -50,6 +67,7 @@ import ModalMessage from '../components/ModalMessage'
 import MqttWrapper from '../components/mqtt_wrapper'
 import RacePadWrapper from '../components/RacePadWrapper'
 import PadMultiButton from '../components/pad/PadMultiButton'
+import { mapGetters } from 'vuex'
 
 export default {
     name: 'race-pad',
@@ -65,6 +83,11 @@ export default {
         MqttWrapper,
         RacePadWrapper
     ],
+    computed: {
+        ...mapGetters([
+            'laf'
+        ])
+    },
     methods: {
         touchstart (command) {
             this.keypress[command] = true

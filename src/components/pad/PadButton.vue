@@ -1,10 +1,11 @@
 <template lang="html">
     <transition appear appear-active-class="animated zoomIn">
         <div class="pad-button"
-            :class="[size, isTouching ? size + '--touch' : '']"
+            :class="[size, isTouching ? 'pad-button--touch' : '']"
+            :style="{'background-color': bgColor, color: fgColor}"
             @touchstart.prevent="onTouchStarts"
             @touchend.prevent="onTouchEnds">
-            <span v-once>{{ text }}</span>
+            <span>{{ label }}</span>
         </div>
     </transition>
 </template>
@@ -13,13 +14,23 @@
 export default {
     name: 'PadButton',
     props: {
-        text: {
+        keyb: {
+            type: String,
+            required: true
+        },
+        label: {
             type: String,
             required: true
         },
         size: {
             type: String,
             required: true
+        },
+        bgColor: {
+            type: String
+        },
+        fgColor: {
+            type: String
         },
         touchstart: {
             type: Function,
@@ -40,12 +51,12 @@ export default {
             // If there's exactly one finger inside this element
             if (e.targetTouches.length === 1) {
                 this.isTouching = true
-                this.touchstart(this.text)
+                this.touchstart(this.keyb)
             }
         },
         onTouchEnds (e) {
             this.isTouching = false
-            this.touchend(this.text)
+            this.touchend(this.keyb)
         }
     }
 }
@@ -58,6 +69,9 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.pad-button--touch {
+    filter: brightness(85%);
 }
 .md {
     width: 130px;
