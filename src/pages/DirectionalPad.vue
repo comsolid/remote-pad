@@ -114,6 +114,9 @@ export default {
             this.keypress.left = false
             this.keypress.right = false
         }
+    },
+    mounted () {
+        this.$store.commit('updatePadType', 'directional')
     }
 }
 </script>

@@ -1,8 +1,5 @@
-const BLUE = '#1E88E5'
-const GREEN = '#27ae60'
-const BLUE_GREY = '#607D8B'
-const WHITESMOKE = '#ecf0f1'
-const WHITE = '#FFF'
+
+import { BLUE, GREEN, BLUE_GREY, WHITESMOKE, WHITE } from '../../colors/n64--default'
 
 module.exports = {
     pad: {

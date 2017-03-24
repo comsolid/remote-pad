@@ -1,9 +1,5 @@
-const BLUE = '#2196F3'
-const PINK = '#E91E63'
-const RED = '#f44336'
-const BLUE_GREY = '#607D8B'
-const WHITESMOKE = '#ecf0f1'
-const WHITE = '#FFF'
+
+import { BLUE, PINK, RED, BLUE_GREY, WHITESMOKE, WHITE } from '../../colors/psx--default'
 
 module.exports = {
     pad: {

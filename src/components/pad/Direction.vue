@@ -48,7 +48,7 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
 .pad-container__arrows {
     display: flex;
     flex-direction: column;

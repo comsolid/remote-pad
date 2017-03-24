@@ -1,38 +1,40 @@
 
+import { BLUE, WHITE, YELLOW, BLACK } from '../../colors/default'
+
 module.exports = {
     pad: {
         bgColor: 'whitesmoke'
     },
     btnA: {
-        bgColor: '#3273dc',
-        fgColor: '#FFF',
+        bgColor: BLUE,
+        fgColor: WHITE,
         label: 'A'
     },
     btnB: {
-        bgColor: '#3273dc',
-        fgColor: '#FFF',
+        bgColor: YELLOW,
+        fgColor: BLACK,
         label: 'B'
     },
     btnY: {
-        bgColor: '#ffdb4a',
-        fgColor: '#111',
+        bgColor: BLUE,
+        fgColor: WHITE,
         label: 'Y'
     },
     btnX: {
-        bgColor: '#ffdb4a',
-        fgColor: '#111',
+        bgColor: YELLOW,
+        fgColor: BLACK,
         label: 'X'
     },
     directional: {
-        bgColor: '#3273dc',
-        fgColor: '#FFF'
+        bgColor: BLUE,
+        fgColor: WHITE
     },
     left: {
-        bgColor: '#3273dc',
-        fgColor: '#FFF'
+        bgColor: BLUE,
+        fgColor: WHITE
     },
     right: {
-        bgColor: '#3273dc',
-        fgColor: '#FFF'
+        bgColor: BLUE,
+        fgColor: WHITE
     }
 }

@@ -76,29 +76,17 @@ export default {
 .md {
     width: 130px;
     height: 130px;
-    background-color: #3273dc;
-    color: #fff;
     font-size: 22px;
-}
-.md--touch {
-    background-color: #0040A9;
 }
 .sm {
     width: 90px;
     height: 90px;
-    background-color: #ffdd57;
-    color: rgba(0, 0, 0, 0.7);
     font-size: 20px;
 }
 .xs {
     width: 60px;
     height: 60px;
-    background-color: #ffdd57;
-    color: rgba(0, 0, 0, 0.7);
     font-size: 16px;
     margin-top: 5px;
-}
-.sm--touch, .xs--touch {
-    background-color: #E6C43E;
 }
 </style>

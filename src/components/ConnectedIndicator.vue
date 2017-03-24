@@ -1,5 +1,5 @@
 <template lang="html">
-    <span class="tag"
+    <span class="tag is-medium"
         :class="color">{{ text }} - {{ currentPlayer }}</span>
 </template>
 
@@ -27,7 +27,4 @@ export default {
 </script>
 
 <style lang="css" scoped>
-span {
-    font-size: 14px;
-}
 </style>

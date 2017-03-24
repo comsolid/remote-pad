@@ -105,6 +105,9 @@ export default {
             this.keypress.up = false
             this.keypress.down = false
         }
+    },
+    mounted () {
+        this.$store.commit('updatePadType', 'race')
     }
 }
 </script>
