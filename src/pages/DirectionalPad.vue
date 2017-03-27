@@ -1,18 +1,26 @@
 <template lang="html">
-    <section class="hero is-light is-fullheight">
+    <section class="hero is-fullheight"
+        :style="{'background-color': laf.pad.bgColor}">
         <div class="hero-head">
             <div class="pad-container">
                 <div class="row-1">
-                    <PadButton text="B" size="sm"
+                    <PadButton keyb="B" size="sm"
+                        :label="laf.btnB.label"
+                        :bgColor="laf.btnB.bgColor"
+                        :fgColor="laf.btnB.fgColor"
                         :touchstart="touchstart"
                         :touchend="touchend"></PadButton>
                     <pad-options></pad-options>
-                    <PadButton text="X" size="sm"
+                    <PadButton keyb="X" size="sm"
+                        :label="laf.btnX.label"
+                        :bgColor="laf.btnX.bgColor"
+                        :fgColor="laf.btnX.fgColor"
                         :touchstart="touchstart"
                         :touchend="touchend"></PadButton>
                 </div>
                 <div class="row-2">
                     <Directional
+                        :bgColor="laf.directional.bgColor"
                         :left="keypress.left"
                         :right="keypress.right"
                         :up="keypress.up"
@@ -21,15 +29,21 @@
                         :panend="panend" />
                     <div class="row-2-right">
                         <div class="row-2-helper">
-                            <PadButton slot="Y" text="Y" size="sm"
-                            :touchstart="touchstart"
-                            :touchend="touchend"></PadButton>
+                            <PadButton keyb="Y" size="sm"
+                                :label="laf.btnY.label"
+                                :bgColor="laf.btnY.bgColor"
+                                :fgColor="laf.btnY.fgColor"
+                                :touchstart="touchstart"
+                                :touchend="touchend"></PadButton>
                             <ConnectedIndicator slot="indicator"
                             :isConnected="mqtt.isConnected"></ConnectedIndicator>
                         </div>
-                        <PadButton text="A" size="md"
-                        :touchstart="touchstart"
-                        :touchend="touchend"></PadButton>
+                        <PadButton keyb="A" size="md"
+                            :label="laf.btnA.label"
+                            :bgColor="laf.btnA.bgColor"
+                            :fgColor="laf.btnA.fgColor"
+                            :touchstart="touchstart"
+                            :touchend="touchend"></PadButton>
                     </div>
                 </div>
             </div>
@@ -50,6 +64,7 @@ import Directional from '../components/pad/Directional'
 import ConnectedIndicator from '../components/ConnectedIndicator'
 import ModalMessage from '../components/ModalMessage'
 import MqttWrapper from '../components/mqtt_wrapper'
+import { mapGetters } from 'vuex'
 
 export default {
     name: 'DirectionalPadPage',
@@ -75,6 +90,11 @@ export default {
             }
         }
     },
+    computed: {
+        ...mapGetters([
+            'laf'
+        ])
+    },
     methods: {
         touchstart (command) {
             this.keypress[command] = true
@@ -94,6 +114,9 @@ export default {
             this.keypress.left = false
             this.keypress.right = false
         }
+    },
+    mounted () {
+        this.$store.commit('updatePadType', 'directional')
     }
 }
 </script>

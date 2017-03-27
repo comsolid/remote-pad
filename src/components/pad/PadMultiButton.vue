@@ -5,11 +5,12 @@
             @panend="onPanEnd"
             @tap="onTouchStarts">
             <div class="directional"
-                :class="[isTouching ? 'directional--touch' : '']">
+                :class="[isTouching ? 'directional--touch' : '']"
+                :style="{'background-color': bgColor, color: fgColor}">
                 <span class="fa-caret-up fa-2x"
                     :class="{pressed: up}"></span>
-                <div class="main-button" v-once>
-                    {{text}}
+                <div class="main-button">
+                    {{label}}
                 </div>
                 <span class="fa-caret-down fa-2x"
                     :class="{pressed: down}"></span>
@@ -32,9 +33,19 @@ export default {
             type: Boolean,
             required: true
         },
-        text: {
+        keyb: {
             type: String,
             required: true
+        },
+        label: {
+            type: String,
+            required: true
+        },
+        bgColor: {
+            type: String
+        },
+        fgColor: {
+            type: String
         },
         pan: {
             type: Function,
@@ -61,14 +72,14 @@ export default {
     methods: {
         onTouchStarts (e) {
             this.isTouching = true
-            this.touchstart(this.text)
+            this.touchstart(this.keyb)
             setTimeout(() => {
                 this.onTouchEnds()
             }, 40)
         },
         onTouchEnds (e) {
             this.isTouching = false
-            this.touchend(this.text)
+            this.touchend(this.keyb)
         },
         onPan (e) {
             const { direction } = e
@@ -92,7 +103,6 @@ export default {
 .directional {
     width: 150px;
     height: 130px;
-    background-color: #3273dc;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.50);
     border-radius: 5px;
     display: flex;
@@ -102,7 +112,7 @@ export default {
     padding: 5px 10px;
 }
 .directional--touch {
-    background-color: #0040A9;
+    filter: brightness(85%);
 }
 .fa-2x, .main-button {
     color: #ecf0f1;
