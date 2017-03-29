@@ -14,13 +14,20 @@ export default {
                 right: false,
                 up: false,
                 down: false
-            }
+            },
+            lastCommandSent: null,
+            interval: null
         }
     },
     mounted () {
         if (window.DeviceMotionEvent !== undefined) {
             window.addEventListener('devicemotion', this.onDeviceMotion, true)
         }
+        this.$store.commit('updatePadType', 'race')
+        // Setup a 60fps interval - 15
+        this.interval = setInterval(() => {
+            this.send()
+        }, 30)
     },
     methods: {
         touchstart (command) {
@@ -29,11 +36,32 @@ export default {
         touchend (command) {
             this.keypress[command] = false
         },
+        pan (command, opposite) {
+            this.keypress[command] = true
+            // guarantee that opposite buttons can't be enabled
+            // at the same time
+            this.keypress[opposite] = false
+        },
+        panend () {
+            this.keypress.up = false
+            this.keypress.down = false
+        },
         isMinimalLayout () {
             return this.$store.state.pad.minimalLayout
         },
         onDeviceMotion (e) {
             this.acceleration.y = e.accelerationIncludingGravity.y || 0
+        },
+        send () {
+            const command = JSON.stringify(this.keypress)
+            if (this.mqtt.client &&
+                this.$store.state.pad.enabled &&
+                    command !== this.lastCommandSent) {
+                // publishes only if the command change
+                this.lastCommandSent = command
+                const { player } = this.$store.state
+                this.mqtt.client.publish(`pad/${player}`, command)
+            }
         }
     },
     computed: {
@@ -50,5 +78,6 @@ export default {
     },
     beforeDestroy () {
         window.removeEventListener('devicemotion', this.onDeviceMotion, true)
+        clearInterval(this.interval)
     }
 }

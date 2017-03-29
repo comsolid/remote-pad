@@ -1,6 +1,6 @@
 <template lang="html">
     <span class="tag is-medium"
-        :class="color">{{ text }} - {{ currentPlayer }}</span>
+        :class="color">{{ text }} - {{ player }}</span>
 </template>
 
 <script>
@@ -19,7 +19,7 @@ export default {
         color () {
             return (this.isConnected ? 'is-success' : 'is-danger')
         },
-        currentPlayer () {
+        player () {
             return this.$store.state.player
         }
     }

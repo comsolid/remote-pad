@@ -5,7 +5,10 @@
             :style="{'background-color': bgColor, color: fgColor}"
             @touchstart.prevent="onTouchStarts"
             @touchend.prevent="onTouchEnds">
-            <span>{{ label }}</span>
+            <span v-if="icon" class="icon is-large">
+                <i class="fa" :class="[icon]"></i>
+            </span>
+            <span v-else>{{ label }}</span>
         </div>
     </transition>
 </template>
@@ -19,8 +22,10 @@ export default {
             required: true
         },
         label: {
-            type: String,
-            required: true
+            type: String
+        },
+        icon: {
+            type: String
         },
         size: {
             type: String,

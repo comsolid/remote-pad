@@ -12,7 +12,8 @@
                                 :value="obj.value"
                                 :number="obj.number"
                                 :selectedValue="player"
-                                @updateSelected="updateSelected"></PlayerSelect>
+                                @updateSelected="updateSelected"
+                                :key="obj.number"></PlayerSelect>
                         </p>
 
                         <label class="label" for="pad_type">PAD Type</label>

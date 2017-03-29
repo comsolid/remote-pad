@@ -3,18 +3,9 @@ import mqtt from 'mqtt'
 export default {
     data () {
         return {
-            topic: 'pad',
-            interval: null,
             mqtt: {
                 client: null,
-                topic: '',
                 isConnected: false
-            },
-            lastCommandSent: null,
-            message: {
-                text: '',
-                type: '',
-                show: false
             }
         }
     },
@@ -22,7 +13,6 @@ export default {
         const { hostname, port } = this.$store.state.mqtt
         const url = `ws://${hostname}:${port}`
         const player = this.$store.state.player
-        this.mqtt.topic = `${this.topic}/${player}`
         const options = {
             username: player,
             password: player
@@ -38,7 +28,6 @@ export default {
         this.mqtt.client.on('connect', () => {
             console.info(`Connected to ${url}`)
             this.mqtt.isConnected = true
-            this.mqtt.client.subscribe(this.mqtt.topic)
             this.mqtt.client.subscribe(`message/${player}`)
             this.mqtt.client.subscribe(`profile/${player}`)
 
@@ -54,41 +43,28 @@ export default {
         this.mqtt.client.on('message', (topic, payload) => {
             if (topic === `message/${player}`) {
                 const result = JSON.parse(payload.toString())
-                this.message.text = result.message
-                this.message.type = result.messageType
-                this.message.show = true
+                this.$store.commit('showMessage', {
+                    text: result.message,
+                    type: result.messageType
+                })
             } else if (topic === `profile/${player}`) {
                 const result = JSON.parse(payload.toString())
                 this.$store.commit('updateProfile', result.profile)
             }
         })
 
-        // Setup a 60fps interval - 15
-        this.interval = setInterval(() => {
-            this.send()
-        }, 30)
+        window.addEventListener('beforeunload', () => {
+            this.closeConnection()
+        })
     },
     methods: {
-        send () {
-            const command = JSON.stringify(this.keypress)
-            if (this.$store.state.pad.enabled &&
-                    command !== this.lastCommandSent) {
-                // publishes only if the command change
-                this.lastCommandSent = command
-                this.mqtt.client.publish(this.mqtt.topic, command)
+        closeConnection () {
+            if (this.mqtt.client) {
+                this.mqtt.client.end()
             }
-        },
-        clearMessage () {
-            this.message.text = ''
-            this.message.type = ''
-            this.message.show = false
         }
     },
     beforeDestroy () {
-        clearInterval(this.interval)
-
-        if (this.mqtt.client) {
-            this.mqtt.client.end()
-        }
+        this.closeConnection()
     }
 }

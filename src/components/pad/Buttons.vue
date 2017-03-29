@@ -2,7 +2,7 @@
     <div class="pad-container__buttons">
         <div class="row row-1">
             <slot name="Y"></slot>
-            <pad-options></pad-options>
+            <pad-options :showChooseLayoutBtn="false"></pad-options>
             <slot name="X"></slot>
         </div>
         <div class="row row-2">

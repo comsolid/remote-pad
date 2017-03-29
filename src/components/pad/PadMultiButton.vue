@@ -7,13 +7,17 @@
             <div class="directional"
                 :class="[isTouching ? 'directional--touch' : '']"
                 :style="{'background-color': bgColor, color: fgColor}">
-                <span class="fa-caret-up fa-2x"
-                    :class="{pressed: up}"></span>
+                <span class="icon is-medium"
+                    :class="{pressed: up}">
+                    <i class="fa fa-caret-up"></i>
+                </span>
                 <div class="main-button">
                     {{label}}
                 </div>
-                <span class="fa-caret-down fa-2x"
-                    :class="{pressed: down}"></span>
+                <span class="icon is-medium"
+                    :class="{pressed: down}">
+                    <i class="fa fa-caret-down"></i>
+                </span>
             </div>
         </v-touch>
     </transition>
