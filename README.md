@@ -1,5 +1,8 @@
 # Remote Pad
 
+[![Build Status](https://travis-ci.org/comsolid/remote-pad.svg?branch=master)](https://travis-ci.org/comsolid/remote-pad)
+[![GitHub license](https://img.shields.io/badge/license-GPL-blue.svg)](https://raw.githubusercontent.com/comsolid/remote-pad/master/LICENSE)
+
 MQTT client running a [vue](https://vuejs.org) SPA that is supposed to send commands
 as if it were the keyboard to a MQTT Broker
 [remote-pad-server](https://github.com/comsolid/remote-pad-server).
