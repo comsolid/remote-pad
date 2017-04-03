@@ -264,6 +264,13 @@ autoprefixer@^6.3.1, autoprefixer@^6.4.0:
     postcss "^5.2.6"
     postcss-value-parser "^3.2.3"
 
+avoriaz@^1.9.4:
+  version "1.9.4"
+  resolved "https://registry.yarnpkg.com/avoriaz/-/avoriaz-1.9.4.tgz#b9fead1bd5e10f88e56e182173d137d2c543ce80"
+  dependencies:
+    lodash "^4.17.4"
+    vue "^2.2.1"
+
 aws-sign2@~0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/aws-sign2/-/aws-sign2-0.6.0.tgz#14342dd38dbcc94d0e5b87d763cd63612c0e794f"
@@ -3624,6 +3631,10 @@ lodash@^4.0.0, lodash@^4.0.1, lodash@^4.14.0, lodash@^4.16.4, lodash@^4.17.2, lo
   version "4.17.2"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.2.tgz#34a3055babe04ce42467b607d700072c7ff6bf42"
 
+lodash@^4.17.4:
+  version "4.17.4"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
+
 lodash@~4.16.4:
   version "4.16.6"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.16.6.tgz#d22c9ac660288f3843e16ba7d2b5d06cca27d777"
@@ -5949,7 +5960,7 @@ vue-touch@next:
     rollup-plugin-commonjs "^7.0.0"
     rollup-plugin-node-resolve "^2.0.0"
 
-vue@^2.2.6:
+vue@^2.2.1, vue@^2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.2.6.tgz#451714b394dd6d4eae7b773c40c2034a59621aed"
 
