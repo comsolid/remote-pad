@@ -20,19 +20,31 @@ const store = new Vuex.Store({
         },
         updatePadType (state, type) {
             state.pad.type = type
+        },
+        showMessage (state, {text, type}) {
+            state.message.text = text
+            state.message.type = type
+            state.message.show = true
+        },
+        clearMessage (state) {
+            state.message.text = ''
+            state.message.type = ''
+            state.message.show = false
         }
     },
     getters: {
         laf (state) {
-            switch (state.profile) {
-            case 'n64--default':
-                return require(`./store/laf/${state.pad.type}/n64--default`)
-            case 'psx--default':
-                return require(`./store/laf/${state.pad.type}/psx--default`)
-            case 'snes--default':
-                return require(`./store/laf/${state.pad.type}/snes--default`)
-            default:
+            try {
+                return require(`./store/laf/${state.pad.type}/${state.profile}`)
+            } catch (err) {
                 return require(`./store/laf/${state.pad.type}/default`)
+            }
+        },
+        layouts (state) {
+            try {
+                return require(`./store/layouts/${state.pad.type}/${state.profile}`)
+            } catch (e) {
+                return []
             }
         }
     },
@@ -50,7 +62,12 @@ const store = new Vuex.Store({
                     port: 1884
                 },
                 accelerationSensibility: 4,
-                profile: ''
+                profile: 'default',
+                message: {
+                    text: '',
+                    type: '',
+                    show: false
+                }
             }
         })
     ]

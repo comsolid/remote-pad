@@ -49,12 +49,7 @@
                 </transition>
             </div>
         </div>
-        <modal-message
-            :message="message.text"
-            :messageType="message.type"
-            :isActive="message.show"
-            @close="clearMessage"
-        ></modal-message>
+        <modal-message></modal-message>
     </section>
 </template>
 
@@ -87,27 +82,6 @@ export default {
         ...mapGetters([
             'laf'
         ])
-    },
-    methods: {
-        touchstart (command) {
-            this.keypress[command] = true
-        },
-        touchend (command) {
-            this.keypress[command] = false
-        },
-        pan (command, opposite) {
-            this.keypress[command] = true
-            // guarantee that opposite buttons can't be enabled
-            // at the same time
-            this.keypress[opposite] = false
-        },
-        panend () {
-            this.keypress.up = false
-            this.keypress.down = false
-        }
-    },
-    mounted () {
-        this.$store.commit('updatePadType', 'race')
     }
 }
 </script>

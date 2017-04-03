@@ -1,6 +1,6 @@
 <template lang="html">
     <button @click.prevent="togglePad"
-        class="button is-medium"
+        class="button"
         :class="color">{{ text }}</button>
 </template>
 

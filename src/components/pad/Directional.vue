@@ -5,17 +5,25 @@
             @panend="onPanEnd">
             <div class="directional"
                 :style="{'background-color': bgColor}">
-                <span class="fa-caret-up fa-2x"
-                    :class="{pressed: up}"></span>
+                <span class="icon is-medium">
+                    <i class="fa fa-caret-up"
+                        :class="{pressed: up}"></i>
+                </span>
                 <div class="left-right">
-                    <span class="fa-caret-left fa-2x"
-                        :class="{pressed: left}"></span>
+                    <span class="icon is-medium">
+                        <i class="fa fa-caret-left"
+                            :class="{pressed: left}"></i>
+                    </span>
                     <span class="helper-text">pan</span>
-                    <span class="fa-caret-right fa-2x"
-                        :class="{pressed: right}"></span>
+                    <span class="icon is-medium">
+                        <i class="fa fa-caret-right"
+                            :class="{pressed: right}"></i>
+                    </span>
                 </div>
-                <span class="fa-caret-down fa-2x"
-                    :class="{pressed: down}"></span>
+                <span class="icon is-medium">
+                    <i class="fa fa-caret-down"
+                        :class="{pressed: down}"></i>
+                </span>
             </div>
         </v-touch>
     </transition>
@@ -92,9 +100,8 @@ export default {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding: 5px 10px;
 }
-.fa-2x, .helper-text {
+.fa, .helper-text {
     color: #ecf0f1;
 }
 .left-right {

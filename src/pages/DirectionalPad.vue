@@ -1,149 +1,62 @@
 <template lang="html">
-    <section class="hero is-fullheight"
-        :style="{'background-color': laf.pad.bgColor}">
-        <div class="hero-head">
-            <div class="pad-container">
-                <div class="row-1">
-                    <PadButton keyb="B" size="sm"
-                        :label="laf.btnB.label"
-                        :bgColor="laf.btnB.bgColor"
-                        :fgColor="laf.btnB.fgColor"
-                        :touchstart="touchstart"
-                        :touchend="touchend"></PadButton>
-                    <pad-options></pad-options>
-                    <PadButton keyb="X" size="sm"
-                        :label="laf.btnX.label"
-                        :bgColor="laf.btnX.bgColor"
-                        :fgColor="laf.btnX.fgColor"
-                        :touchstart="touchstart"
-                        :touchend="touchend"></PadButton>
-                </div>
-                <div class="row-2">
-                    <Directional
-                        :bgColor="laf.directional.bgColor"
-                        :left="keypress.left"
-                        :right="keypress.right"
-                        :up="keypress.up"
-                        :down="keypress.down"
-                        :pan="pan"
-                        :panend="panend" />
-                    <div class="row-2-right">
-                        <div class="row-2-helper">
-                            <PadButton keyb="Y" size="sm"
-                                :label="laf.btnY.label"
-                                :bgColor="laf.btnY.bgColor"
-                                :fgColor="laf.btnY.fgColor"
-                                :touchstart="touchstart"
-                                :touchend="touchend"></PadButton>
-                            <ConnectedIndicator slot="indicator"
-                            :isConnected="mqtt.isConnected"></ConnectedIndicator>
-                        </div>
-                        <PadButton keyb="A" size="md"
-                            :label="laf.btnA.label"
-                            :bgColor="laf.btnA.bgColor"
-                            :fgColor="laf.btnA.fgColor"
-                            :touchstart="touchstart"
-                            :touchend="touchend"></PadButton>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <modal-message
-            :message="message.text"
-            :messageType="message.type"
-            :isActive="message.show"
-            @close="clearMessage"
-        ></modal-message>
+    <section class="hero is-light is-fullheight">
+        <component :is="currentView" :mqtt="mqtt"
+            :keyset="keyset">
+            <pad-options slot="options"
+                @chooseLayout="chooseLayout"></pad-options>
+        </component>
+        <modal-message></modal-message>
+        <modal-layout-selector
+            :isActive="selector.isActive"
+            @close="selector.isActive = false"
+            @updateLayout="updateLayout"></modal-layout-selector>
     </section>
 </template>
 
 <script>
-import PadButton from '../components/pad/PadButton'
-import PadOptions from '../components/PadOptions'
-import Directional from '../components/pad/Directional'
-import ConnectedIndicator from '../components/ConnectedIndicator'
 import ModalMessage from '../components/ModalMessage'
+import PadOptions from '../components/PadOptions'
+import DirectionalPadDefault from '../layouts/directional/Default'
+import TwoButtonsPad from '../layouts/directional/TwoButtons'
+import ThreeButtonsPad from '../layouts/directional/ThreeButtons'
+import DirectionalAndTwoButtons from '../layouts/directional/DirectionalAndTwoButtons'
 import MqttWrapper from '../components/mqtt_wrapper'
-import { mapGetters } from 'vuex'
+import ModalLayoutSelector from '../layouts/directional/ModalLayoutSelector'
 
 export default {
     name: 'DirectionalPadPage',
     components: {
-        PadButton,
+        ModalMessage,
         PadOptions,
-        Directional,
-        ConnectedIndicator,
-        ModalMessage
+        ModalLayoutSelector,
+        'directional-pad-default': DirectionalPadDefault,
+        'pad-2btn--touch': TwoButtonsPad,
+        'pad-3btn--touch': ThreeButtonsPad,
+        'pad-dir-and-2btn--touch': DirectionalAndTwoButtons
     },
-    extends: MqttWrapper,
+    mixins: [
+        MqttWrapper
+    ],
     data () {
         return {
-            keypress: {
-                Y: false,
-                X: false,
-                B: false,
-                A: false,
-                left: false,
-                right: false,
-                up: false,
-                down: false
+            currentView: 'directional-pad-default',
+            keyset: [],
+            selector: {
+                isActive: false
             }
         }
     },
-    computed: {
-        ...mapGetters([
-            'laf'
-        ])
-    },
     methods: {
-        touchstart (command) {
-            this.keypress[command] = true
+        chooseLayout () {
+            this.selector.isActive = true
         },
-        touchend (command) {
-            this.keypress[command] = false
-        },
-        pan (command, opposite) {
-            this.keypress[command] = true
-            // guarantee that opposite buttons can't be enabled
-            // at the same time
-            this.keypress[opposite] = false
-        },
-        panend () {
-            this.keypress.up = false
-            this.keypress.down = false
-            this.keypress.left = false
-            this.keypress.right = false
+        updateLayout (layout, keyset) {
+            this.currentView = layout
+            this.keyset = keyset
         }
-    },
-    mounted () {
-        this.$store.commit('updatePadType', 'directional')
     }
 }
 </script>
 
 <style lang="css" scoped>
-.pad-container {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-.row-1, .row-2 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 16px;
-}
-.row-2-right {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-.row-2-helper {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 50vh;
-    margin: auto 20px;
-}
 </style>
