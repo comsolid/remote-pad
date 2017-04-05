@@ -3,7 +3,7 @@ import ConnectedIndicator from 'src/components/ConnectedIndicator'
 import avoriaz, { mount } from 'avoriaz'
 import { expect } from 'chai'
 import Vuex from 'vuex'
-import { initialState as state } from 'src/store/state'
+import state from 'src/store/state'
 
 avoriaz.use(Vuex)
 
