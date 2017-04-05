@@ -1,6 +1,7 @@
 <template lang="html">
     <a class="button" :class="htmlClass"
-        @click.prevent="goFullscreen">
+        @click.prevent="goFullscreen"
+        v-show="showButton">
         <span class="icon">
             <span class="fa fa-expand"></span>
         </span>
@@ -9,7 +10,7 @@
 </template>
 
 <script>
-import lockScreen from '../utils/lock_screen'
+import screenfull from 'screenfull'
 
 export default {
     props: {
@@ -19,10 +20,23 @@ export default {
             default: true
         }
     },
+    data () {
+        return {
+            showButton: !screenfull.isFullscreen
+        }
+    },
     methods: {
         goFullscreen () {
-            lockScreen()
+            if (screenfull.enabled) {
+                screenfull.request()
+                window.screen.orientation.lock('landscape')
+            }
         }
+    },
+    mounted () {
+        screenfull.onchange(() => {
+            this.showButton = !screenfull.isFullscreen
+        })
     }
 }
 </script>
