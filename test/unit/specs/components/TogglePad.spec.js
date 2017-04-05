@@ -3,7 +3,7 @@ import TogglePad from 'src/components/TogglePad'
 import avoriaz, { mount } from 'avoriaz'
 import { expect } from 'chai'
 import Vuex from 'vuex'
-import { initialState as state } from 'src/store/state'
+import state from 'src/store/state'
 import { mutations } from 'src/store/mutations'
 
 avoriaz.use(Vuex)

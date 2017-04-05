@@ -1,5 +1,5 @@
 
-export const initialState = {
+export default {
     player: 'alice',
     pad: {
         enabled: false,
