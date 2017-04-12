@@ -1,5 +1,5 @@
 
-import { BLUE, GREEN, BLUE_GREY, WHITESMOKE, WHITE } from '../../colors/n64--default'
+import { BLUE, GREEN, BLUE_GREY, WHITESMOKE, WHITE, RED } from '../../colors/n64--default'
 
 module.exports = {
     pad: {
@@ -62,5 +62,11 @@ module.exports = {
         label: 'Down',
         icon: 'fa-caret-down',
         keyb: 'down'
+    },
+    btnStart: {
+        bgColor: RED,
+        fgColor: WHITE,
+        label: 'Start',
+        keyb: 'start'
     }
 }

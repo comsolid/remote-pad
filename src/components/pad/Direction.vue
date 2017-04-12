@@ -3,7 +3,10 @@
         :class="{'is-turning': turning}"
         :style="{'background-color': bgColor, color: fgColor}">
         <div v-once>
-            {{ val }}
+            <span class="icon is-medium">
+                <i class="fa"
+                    :class="[icon]"></i>
+            </span>
         </div>
     </div>
 </template>
@@ -33,12 +36,12 @@ export default {
             switch (this.position) {
             case 'left':
                 values = {
-                    val: 'L'
+                    icon: 'fa-caret-left'
                 }
                 break
             case 'right':
                 values = {
-                    val: 'R'
+                    icon: 'fa-caret-right'
                 }
                 break
             }
@@ -62,7 +65,6 @@ export default {
 
 .pad-container__arrows > div {
     align-self: center;
-    font-size: 22px;
 }
 
 .is-turning {

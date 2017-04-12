@@ -1,6 +1,14 @@
 <template lang="html">
     <div class="pad-container">
         <div class="row-1">
+            <PadButton :keyb="laf.btnStart.keyb" size="xs"
+                :label="laf.btnStart.label"
+                :icon="laf.btnStart.icon || ''"
+                :bgColor="laf.btnStart.bgColor"
+                :fgColor="laf.btnStart.fgColor"
+                :touchstart="touchstart"
+                :touchend="touchend"
+                v-show="startEnable"></PadButton>
             <slot name="options"></slot>
         </div>
         <div class="row-1">
@@ -70,7 +78,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 24px;
+    padding: 20px 24px;
 }
 .bottom {
     display: flex;

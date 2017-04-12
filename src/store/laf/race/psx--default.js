@@ -8,33 +8,65 @@ module.exports = {
     btnA: {
         bgColor: RED,
         fgColor: WHITE,
-        label: 'Ci'
+        label: 'Ci',
+        keyb: 'A'
     },
     btnB: {
         bgColor: BLUE,
         fgColor: WHITE,
-        label: 'X'
+        label: 'X',
+        keyb: 'B'
     },
     btnY: {
         bgColor: PINK,
         fgColor: WHITE,
-        label: 'Sq'
+        label: 'Sq',
+        keyb: 'Y'
     },
     btnX: {
         bgColor: BLUE_GREY,
         fgColor: WHITE,
-        label: 'R1'
+        label: 'R1',
+        keyb: 'X'
     },
     directional: {
         bgColor: BLUE_GREY,
-        fgColor: WHITE
+        fgColor: WHITE,
+        label: 'Directional',
+        icon: 'fa-directional'
     },
     left: {
         bgColor: BLUE_GREY,
-        fgColor: WHITE
+        fgColor: WHITE,
+        label: 'Left',
+        icon: 'fa-caret-left',
+        keyb: 'left'
     },
     right: {
         bgColor: BLUE_GREY,
-        fgColor: WHITE
+        fgColor: WHITE,
+        label: 'Right',
+        icon: 'fa-caret-right',
+        keyb: 'right'
+    },
+    up: {
+        bgColor: BLUE_GREY,
+        fgColor: WHITE,
+        label: 'Up',
+        icon: 'fa-caret-up',
+        keyb: 'up'
+    },
+    down: {
+        bgColor: BLUE_GREY,
+        fgColor: WHITE,
+        label: 'Down',
+        icon: 'fa-caret-down',
+        keyb: 'down'
+    },
+    btnStart: {
+        bgColor: BLUE_GREY,
+        fgColor: WHITE,
+        label: 'Start',
+        keyb: 'start'
     }
 }

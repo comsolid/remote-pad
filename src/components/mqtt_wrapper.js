@@ -13,6 +13,10 @@ export default {
         const { hostname, port } = this.$store.state.mqtt
         const url = `ws://${hostname}:${port}`
         const player = this.$store.state.player
+        if (!player) {
+            this.$router.push({ path: '/config' })
+            return false
+        }
         const options = {
             username: player,
             password: player

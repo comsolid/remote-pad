@@ -91,7 +91,7 @@ export default {
 .xs {
     width: 60px;
     height: 60px;
-    font-size: 16px;
+    font-size: 14px;
     margin-top: 5px;
 }
 </style>

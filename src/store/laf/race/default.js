@@ -1,5 +1,5 @@
 
-import { BLUE, WHITE, YELLOW, BLACK } from '../../colors/default'
+import { BLUE, WHITE, YELLOW, BLACK, RED } from '../../colors/default'
 
 module.exports = {
     pad: {
@@ -8,22 +8,26 @@ module.exports = {
     btnA: {
         bgColor: BLUE,
         fgColor: WHITE,
-        label: 'A'
+        label: 'A',
+        keyb: 'A'
     },
     btnB: {
         bgColor: BLUE,
         fgColor: WHITE,
-        label: 'B'
+        label: 'B',
+        keyb: 'B'
     },
     btnY: {
         bgColor: YELLOW,
         fgColor: BLACK,
-        label: 'Y'
+        label: 'Y',
+        keyb: 'Y'
     },
     btnX: {
         bgColor: YELLOW,
         fgColor: BLACK,
-        label: 'X'
+        label: 'X',
+        keyb: 'X'
     },
     directional: {
         bgColor: BLUE,
@@ -31,10 +35,18 @@ module.exports = {
     },
     left: {
         bgColor: BLUE,
-        fgColor: WHITE
+        fgColor: WHITE,
+        keyb: 'left'
     },
     right: {
         bgColor: BLUE,
-        fgColor: WHITE
+        fgColor: WHITE,
+        keyb: 'right'
+    },
+    btnStart: {
+        bgColor: RED,
+        fgColor: WHITE,
+        label: 'Start',
+        keyb: 'start'
     }
 }

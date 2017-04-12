@@ -1,15 +1,16 @@
 
 export default {
-    player: 'alice',
+    player: '',
     pad: {
         enabled: false,
-        type: 'race'
+        type: 'race',
+        startEnable: false
     },
     mqtt: {
         hostname: window.location.hostname,
         port: 1884
     },
-    accelerationSensibility: 4,
+    accelerationSensibility: 4.5,
     profile: 'default',
     message: {
         text: '',

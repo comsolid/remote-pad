@@ -5,7 +5,10 @@ export default {
     computed: {
         ...mapGetters([
             'laf'
-        ])
+        ]),
+        startEnable () {
+            return this.$store.state.pad.startEnable
+        }
     },
     methods: {
         touchstart (command) {
@@ -28,6 +31,7 @@ export default {
         }
     },
     mounted () {
+        // TODO: use $store.state.pad.type instead of hardcoded value!
         this.$store.commit('updatePadType', 'directional')
     }
 }

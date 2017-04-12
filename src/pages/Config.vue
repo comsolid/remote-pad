@@ -100,10 +100,11 @@ export default {
             },
             pad: {
                 type: '',
-                enabled: false
+                enabled: false,
+                startEnable: false
             },
             player: '',
-            accelerationSensibility: 4,
+            accelerationSensibility: 4.5,
             accelerationRange: {
                 min: 3,
                 max: 6,
@@ -143,6 +144,7 @@ export default {
     },
     methods: {
         save () {
+            this.pad.startEnable = (this.player === 'alice')
             this.$store.commit('config', {
                 mqtt: this.mqtt,
                 pad: this.pad,

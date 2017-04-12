@@ -19,6 +19,15 @@
                 </header>
                 <section class="modal-card-body">
                     <div class="content">
+                        <div class="field">
+                            <p class="control">
+                                <label class="checkbox">
+                                    <input type="checkbox"
+                                        v-model="startEnable">
+                                    Toggle Start button
+                                </label>
+                            </p>
+                        </div>
                         <label class="label">Select Layout</label>
                         <p class="control players-list">
                             <layout-selector-item v-for="(value, key) in layouts"
@@ -78,7 +87,15 @@ export default {
     computed: {
         ...mapGetters([
             'layouts'
-        ])
+        ]),
+        startEnable: {
+            get () {
+                return this.$store.state.pad.startEnable
+            },
+            set (value) {
+                this.$store.commit('toggleStart', value)
+            }
+        }
     }
 }
 </script>
