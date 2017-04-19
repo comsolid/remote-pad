@@ -7,7 +7,16 @@
                 :fgColor="laf.btnB.fgColor"
                 :touchstart="touchstart"
                 :touchend="touchend"></PadButton>
-            <slot name="options"></slot>
+            <div class="row-1-2">
+                <slot name="options"></slot>
+                <PadButton :keyb="laf.btnStart.keyb" size="xs"
+                    :label="laf.btnStart.label"
+                    :bgColor="laf.btnStart.bgColor"
+                    :fgColor="laf.btnStart.fgColor"
+                    :touchstart="touchstart"
+                    :touchend="touchend"
+                    v-show="startEnable"></PadButton>
+            </div>
             <PadButton keyb="X" size="sm"
                 :label="laf.btnX.label"
                 :bgColor="laf.btnX.bgColor"
@@ -96,5 +105,11 @@ export default {
     justify-content: space-between;
     height: 50vh;
     margin: auto 20px;
+}
+.row-1-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
 }
 </style>

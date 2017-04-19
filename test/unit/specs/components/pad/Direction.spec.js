@@ -14,13 +14,13 @@ describe(`Direction component`, () => {
     it(`should render the right direction`, () => {
         propsData.position = 'right'
         const wrapper = mount(Direction, { propsData })
-        expect(wrapper.data().val).to.equal('R')
+        expect(wrapper.data().icon).to.equal('fa-caret-right')
     })
 
     it(`should render the left direction`, () => {
         propsData.position = 'left'
         const wrapper = mount(Direction, { propsData })
-        expect(wrapper.data().val).to.equal('L')
+        expect(wrapper.data().icon).to.equal('fa-caret-left')
     })
 
     it(`should change color while turning`, () => {

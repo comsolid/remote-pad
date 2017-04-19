@@ -24,5 +24,8 @@ export const mutations = {
         state.message.text = ''
         state.message.type = ''
         state.message.show = false
+    },
+    toggleStart (state) {
+        state.pad.startEnable = !state.pad.startEnable
     }
 }

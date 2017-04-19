@@ -11,7 +11,8 @@ export default {
                 left: false,
                 right: false,
                 up: false,
-                down: false
+                down: false,
+                start: false
             },
             lastCommandSent: null,
             interval: null

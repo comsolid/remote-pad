@@ -13,7 +13,8 @@ export default {
                 left: false,
                 right: false,
                 up: false,
-                down: false
+                down: false,
+                start: false
             },
             lastCommandSent: null,
             interval: null
@@ -23,6 +24,7 @@ export default {
         if (window.DeviceMotionEvent !== undefined) {
             window.addEventListener('devicemotion', this.onDeviceMotion, true)
         }
+        // TODO: use $store.state.pad.type instead of hardcoded value!
         this.$store.commit('updatePadType', 'race')
         // Setup a 60fps interval - 15
         this.interval = setInterval(() => {

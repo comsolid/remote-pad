@@ -22,7 +22,7 @@ describe(`ConnectedIndicator component`, () => {
         const wrapper = mount(ConnectedIndicator, { store, propsData })
         expect(wrapper.vm.text).to.equal('D')
         expect(wrapper.vm.color).to.equal('is-danger')
-        expect(wrapper.vm.player).to.equal('alice')
+        expect(wrapper.vm.player).to.equal('')
     })
 
     it(`should change when is connected`, () => {
