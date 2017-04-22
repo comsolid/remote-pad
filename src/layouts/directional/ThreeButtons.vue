@@ -12,29 +12,33 @@
             <slot name="options"></slot>
         </div>
         <div class="row-1">
-            <PadButton :keyb="laf[keyset[0]].keyb" size="md"
-                :label="laf[keyset[0]].label"
-                :bgColor="laf[keyset[0]].bgColor"
-                :fgColor="laf[keyset[0]].fgColor"
-                :touchstart="touchstart"
-                :touchend="touchend"
-            ></PadButton>
+            <div class="row-1-1">
+                <PadButton :keyb="laf[keyset[0]].keyb" size="md"
+                    :label="laf[keyset[0]].label"
+                    :bgColor="laf[keyset[0]].bgColor"
+                    :fgColor="laf[keyset[0]].fgColor"
+                    :touchstart="touchstart"
+                    :touchend="touchend"
+                ></PadButton>
+            </div>
+            <div class="row-1-2">
+                <PadButton :keyb="laf[keyset[1]].keyb" size="md"
+                    :label="laf[keyset[1]].label"
+                    :bgColor="laf[keyset[1]].bgColor"
+                    :fgColor="laf[keyset[1]].fgColor"
+                    :touchstart="touchstart"
+                    :touchend="touchend"
+                    class="has-margin-right"
+                ></PadButton>
 
-            <PadButton :keyb="laf[keyset[1]].keyb" size="md"
-                :label="laf[keyset[1]].label"
-                :bgColor="laf[keyset[1]].bgColor"
-                :fgColor="laf[keyset[1]].fgColor"
-                :touchstart="touchstart"
-                :touchend="touchend"
-            ></PadButton>
-
-            <PadButton :keyb="laf[keyset[2]].keyb" size="md"
-                :label="laf[keyset[2]].label"
-                :bgColor="laf[keyset[2]].bgColor"
-                :fgColor="laf[keyset[2]].fgColor"
-                :touchstart="touchstart"
-                :touchend="touchend"
-            ></PadButton>
+                <PadButton :keyb="laf[keyset[2]].keyb" size="md"
+                    :label="laf[keyset[2]].label"
+                    :bgColor="laf[keyset[2]].bgColor"
+                    :fgColor="laf[keyset[2]].fgColor"
+                    :touchstart="touchstart"
+                    :touchend="touchend"
+                ></PadButton>
+            </div>
         </div>
         <div class="bottom">
             <ConnectedIndicator slot="indicator"
@@ -89,5 +93,16 @@ export default {
 .bottom {
     display: flex;
     justify-content: center;
+}
+.row-1-1 {
+    flex-grow: 1;
+}
+.row-1-2 {
+    display: flex;
+    justify-content: flex-end;
+    flex-grow: 1;
+}
+.has-margin-right {
+    margin-right: 20px;
 }
 </style>
