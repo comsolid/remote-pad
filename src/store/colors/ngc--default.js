@@ -1,0 +1,10 @@
+
+export const BLUE = '#3273dc'
+export const WHITE = '#fff'
+export const YELLOW = '#ffdb4a'
+export const BLACK = '#111'
+export const RED = '#e74c3c'
+export const GREEN = '#16a085'
+export const WHITESMOKE = '#ecf0f1'
+export const BLUE_GREY = '#607D8B'
+export const SILVER = '#95a5a6'
