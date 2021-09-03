@@ -31,6 +31,9 @@ Good for games like SNES Bomberman, N64 Mario Tennis.
 You can install [Remote Pad GUI](https://github.com/comsolid/remote-pad-gui)
 to start a desktop app.
 
+
+A video of this application can be seen at https://www.youtube.com/watch?v=93f1dRWxhyc.
+
 ## Development
 
 ``` bash
